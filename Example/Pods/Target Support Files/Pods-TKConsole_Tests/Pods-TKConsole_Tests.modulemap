@@ -1,0 +1,6 @@
+framework module Pods_TKConsole_Tests {
+  umbrella header "Pods-TKConsole_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

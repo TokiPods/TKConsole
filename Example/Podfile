@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TKConsole_Example' do
+  pod 'TKConsole', :path => '../'
+
+  target 'TKConsole_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

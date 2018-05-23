@@ -1,0 +1,16 @@
+PODS:
+  - TKConsole (0.1.0)
+
+DEPENDENCIES:
+  - TKConsole (from `../`)
+
+EXTERNAL SOURCES:
+  TKConsole:
+    :path: ../
+
+SPEC CHECKSUMS:
+  TKConsole: f8512c6a6c7e22882e151043a44d62efe56c1734
+
+PODFILE CHECKSUM: 5b7f4f627a1288d4df7413db555d7d615cdf183b
+
+COCOAPODS: 1.4.0
