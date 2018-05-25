@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TKConsole
 
 class ViewController: UIViewController {
 
@@ -20,5 +21,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func log(_ sender: Any) {
+        Console.log("This is a log")
+    }
+    @IBAction func save(_ sender: Any) {
+        Console.saveLog()
+    }
+    @IBAction func read(_ sender: Any) {
+        Console.readLog(form: Date.distantPast, to: Date.distantFuture)
+    }
 }
 
