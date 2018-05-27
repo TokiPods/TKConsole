@@ -18,5 +18,10 @@
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "TKConsole/Classes/**/*"
+  "source_files": "TKConsole/Classes/**/*",
+  "resource_bundles": {
+    "TKConsole": [
+      "TKConsole/Assets/**/*"
+    ]
+  }
 }

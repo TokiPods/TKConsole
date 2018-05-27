@@ -27,6 +27,16 @@ public class Console {
 
 extension Console {
     
+    public static func initGate() {
+        if let gateView = TKConsoleGateView.loadFromNib() {
+            TKWindow?.addSubview(gateView)
+        }
+    }
+    
+}
+
+extension Console {
+    
     /// 输出日志
     public static func log(
         _ items: Any...,
