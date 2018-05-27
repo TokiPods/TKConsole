@@ -30,7 +30,7 @@
 /* Begin PBXFileReference section */
 		0F2A15F921E1D05E93E3C691 /* Pods_TKConsole_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TKConsole_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16BE560553949BF9934F0CCA /* Pods-TKConsole_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKConsole_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-TKConsole_Example/Pods-TKConsole_Example.release.xcconfig"; sourceTree = "<group>"; };
-		198A8EE5EE8D0EF14F9DEBF8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		198A8EE5EE8D0EF14F9DEBF8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		38859EDE24FD5EF43D0E1930 /* Pods-TKConsole_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKConsole_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TKConsole_Tests/Pods-TKConsole_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* TKConsole_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TKConsole_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,8 +42,8 @@
 		607FACE51AFB9204008FA782 /* TKConsole_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TKConsole_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		7A95FC501E16CC1EEA2D58FD /* TKConsole.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = TKConsole.podspec; path = ../TKConsole.podspec; sourceTree = "<group>"; };
-		99B92B138E6D7DE2136D3344 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		7A95FC501E16CC1EEA2D58FD /* TKConsole.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = TKConsole.podspec; path = ../TKConsole.podspec; sourceTree = "<group>"; };
+		99B92B138E6D7DE2136D3344 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		ABADD94DBB17A5697B7E2A85 /* Pods-TKConsole_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKConsole_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TKConsole_Example/Pods-TKConsole_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C02FF5452DDD2ECD767F7780 /* Pods-TKConsole_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TKConsole_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TKConsole_Tests/Pods-TKConsole_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E909890F1DA24295A1C558FF /* Pods_TKConsole_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TKConsole_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,10 +215,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = B3AFGM9JL7;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = B3AFGM9JL7;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -517,6 +519,7 @@
 			baseConfigurationReference = ABADD94DBB17A5697B7E2A85 /* Pods-TKConsole_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B3AFGM9JL7;
 				INFOPLIST_FILE = TKConsole/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -532,6 +535,7 @@
 			baseConfigurationReference = 16BE560553949BF9934F0CCA /* Pods-TKConsole_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = B3AFGM9JL7;
 				INFOPLIST_FILE = TKConsole/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -546,6 +550,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C02FF5452DDD2ECD767F7780 /* Pods-TKConsole_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = B3AFGM9JL7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -567,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 38859EDE24FD5EF43D0E1930 /* Pods-TKConsole_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = B3AFGM9JL7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

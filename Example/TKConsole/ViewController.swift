@@ -11,6 +11,11 @@ import TKConsole
 
 class ViewController: UIViewController {
 
+    var logNumber = 0
+    
+    @IBOutlet weak var date: UIButton!
+    @IBOutlet weak var from: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -22,13 +27,24 @@ class ViewController: UIViewController {
     }
 
     @IBAction func log(_ sender: Any) {
-        Console.log("This is a log")
+        Console.log("This is a log", logNumber)
+        logNumber += 1
     }
     @IBAction func save(_ sender: Any) {
-        Console.saveLog()
+        Console.shared.saveLog()
+    }
+    @IBAction func date(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+    }
+    @IBAction func from(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
     }
     @IBAction func read(_ sender: Any) {
-        Console.readLog(form: Date.distantPast, to: Date.distantFuture)
+        Console.shared.ptintAllLog(form: Date.distantPast, to: Date.distantFuture,
+                                   hasDate: date.isSelected, hasFrom: from.isSelected)
+    }
+    @IBAction func clean(_ sender: Any) {
+        Console.shared.removeAllLog(form: Date.distantPast, to: Date.distantFuture)
     }
 }
 

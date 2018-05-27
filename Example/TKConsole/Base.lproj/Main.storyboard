@@ -64,20 +64,67 @@
                                     <action selector="read:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="v6x-u0-l56"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaw-al-hG4">
+                                <rect key="frame" x="137" y="320" width="100" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Acs-Nj-x4Y"/>
+                                    <constraint firstAttribute="width" constant="100" id="mr9-1f-YJB"/>
+                                </constraints>
+                                <state key="normal" title="Clean">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="clean:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PAK-aQ-JNJ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="54a-tY-w1x">
+                                <rect key="frame" x="87.5" y="270" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Wei-HO-SUT"/>
+                                    <constraint firstAttribute="height" constant="30" id="th2-iL-4Cr"/>
+                                </constraints>
+                                <state key="normal" title="From"/>
+                                <connections>
+                                    <action selector="from:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="8sK-KG-ATM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mx9-Jj-7m4">
+                                <rect key="frame" x="37.5" y="270" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="LqY-ex-24x"/>
+                                    <constraint firstAttribute="width" constant="40" id="V00-2D-YIz"/>
+                                </constraints>
+                                <state key="normal" title="Date"/>
+                                <connections>
+                                    <action selector="date:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xFP-to-2ty"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="HWg-DA-tuQ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="0ws-Gu-Q4m"/>
+                            <constraint firstItem="iOo-xY-wxK" firstAttribute="leading" secondItem="54a-tY-w1x" secondAttribute="trailing" constant="10" id="87c-hN-HQM"/>
+                            <constraint firstItem="eaw-al-hG4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="300" id="8Za-Qr-ViP"/>
+                            <constraint firstItem="54a-tY-w1x" firstAttribute="leading" secondItem="Mx9-Jj-7m4" secondAttribute="trailing" constant="10" id="KAX-Fr-GmW"/>
+                            <constraint firstItem="eaw-al-hG4" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Kmj-fy-VzS"/>
                             <constraint firstItem="Go5-fG-kbq" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="150" id="Zvi-b7-CzR"/>
                             <constraint firstItem="Go5-fG-kbq" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="gka-At-lXL"/>
                             <constraint firstItem="iOo-xY-wxK" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="h6q-Hi-xvc"/>
                             <constraint firstItem="HWg-DA-tuQ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="200" id="l5w-rS-3Ng"/>
                             <constraint firstItem="iOo-xY-wxK" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="250" id="mcw-lX-bMw"/>
+                            <constraint firstItem="iOo-xY-wxK" firstAttribute="centerY" secondItem="Mx9-Jj-7m4" secondAttribute="centerY" id="rGP-Ix-X22"/>
+                            <constraint firstItem="54a-tY-w1x" firstAttribute="centerY" secondItem="Mx9-Jj-7m4" secondAttribute="centerY" id="x0B-IU-gU3"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="date" destination="Mx9-Jj-7m4" id="J5S-hz-hUj"/>
+                        <outlet property="from" destination="54a-tY-w1x" id="3hS-0o-C3c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="59.820089955022496"/>
         </scene>
     </scenes>
 </document>
