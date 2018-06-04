@@ -24,3 +24,21 @@ extension Array {
         return message
     }
 }
+
+extension Array where Element == TKLog{
+    func message(hasDate: Bool = false, hasFrom: Bool = false) -> String {
+        var message = ""
+        self.forEach { (log) in
+            message += log.message(hasDate: hasDate, hasFrom: hasFrom)
+        }
+        return message
+    }
+    
+    func attributedMessage(hasDate: Bool = false, hasFrom: Bool = false) -> NSAttributedString {
+        let attributedMessage = NSMutableAttributedString(string: "")
+        self.forEach { (log) in
+            attributedMessage.append(log.attributedMessage(hasDate: hasDate, hasFrom: hasFrom))
+        }
+        return attributedMessage.copy() as! NSAttributedString
+    }
+}

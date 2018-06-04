@@ -12,6 +12,7 @@ import TKConsole
 class ViewController: UIViewController {
 
     var logNumber = 0
+    var logSuffix = ""
     
     @IBOutlet weak var date: UIButton!
     @IBOutlet weak var from: UIButton!
@@ -31,8 +32,13 @@ class ViewController: UIViewController {
     }
 
     @IBAction func log(_ sender: Any) {
-        Console.log("This is a log", logNumber)
+        Console.log("This is a log", logNumber, logSuffix)
         logNumber += 1
+        logSuffix += "+|+|"
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.log(sender)
+        }
     }
     @IBAction func save(_ sender: Any) {
         Console.shared.saveLog()

@@ -12,6 +12,7 @@ public class Console {
     
     public static let shared = Console()
     
+    static let recordNotificationName = "TKRecordNotificationName"
     static let animateDuration = 0.3
     
     /// 当前内存中的日志
@@ -22,15 +23,12 @@ public class Console {
     var startDate: Date = Date.distantPast
     var endDate: Date = Date.distantFuture
     
+    var hasDate: Bool = false
+    var hasFrom: Bool = false
+    
     lazy var blockingView: UIView = {
         let temp = UIView()
         temp.backgroundColor = UIColor(white: 0, alpha: 0.4)
-        return temp
-    }()
-    
-    lazy var consoleGateView: TKConsoleGateView? = {
-        let temp = TKConsoleGateView.loadFromNib()
-        temp?.delegate = self
         return temp
     }()
     
@@ -38,12 +36,6 @@ public class Console {
     var consoleGateSize: CGSize = CGSize(width: 40, height: 40)
     var consoleOrigin: CGPoint = CGPoint(x: 20, y: 20)
     var consoleSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 40)
-    
-    lazy var consoleView: TKConsoleView? = {
-        let temp = TKConsoleView.loadFromNib()
-        temp?.delegate = self
-        return temp
-    }()
     
     init() {
         self.updateLogFileList()
@@ -57,7 +49,9 @@ extension Console {
         Console.shared.consoleGateSize = size ?? Console.shared.consoleGateSize
         
         if let window = TKWindow {
-            if let consoleGateView = Console.shared.consoleGateView {
+            if let consoleGateView = TKConsoleGateView.loadFromNib() {
+                consoleGateView.delegate = Console.shared
+                
                 let consoleGateCenter = Console.shared.consoleGateCenter
                 let consoleGateSize = Console.shared.consoleGateSize
                 let blockingView = Console.shared.blockingView
@@ -82,30 +76,28 @@ extension Console {
         }
     }
     
-    public static func closeConsoleGateView(center: CGPoint? = nil) {
+    static func closeConsoleGateView(_ consoleGateView: TKConsoleGateView, center: CGPoint? = nil) {
         Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
         
         if let window = TKWindow {
-            if let consoleGateView = Console.shared.consoleGateView {
-                let consoleGateCenter = Console.shared.consoleGateCenter
-                let blockingView = Console.shared.blockingView
-                
-                blockingView.frame = window.frame
-                
-                window.addSubview(blockingView)
-                window.addSubview(consoleGateView)
-                
-                UIView.animate(withDuration: animateDuration,
-                               delay: 0,
-                               options: UIViewAnimationOptions.layoutSubviews,
-                               animations: {
-                    consoleGateView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
-                }) { (completion) in
-                    if completion {
-                        consoleGateView.removeFromSuperview()
-                        blockingView.removeFromSuperview()
-                        showConsoleView(center: center, size: Console.shared.consoleSize)
-                    }
+            let consoleGateCenter = Console.shared.consoleGateCenter
+            let blockingView = Console.shared.blockingView
+            
+            blockingView.frame = window.frame
+            
+            window.addSubview(blockingView)
+            window.addSubview(consoleGateView)
+            
+            UIView.animate(withDuration: animateDuration,
+                           delay: 0,
+                           options: UIViewAnimationOptions.layoutSubviews,
+                           animations: {
+                consoleGateView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+            }) { (completion) in
+                if completion {
+                    consoleGateView.removeFromSuperview()
+                    blockingView.removeFromSuperview()
+                    showConsoleView(center: center, size: Console.shared.consoleSize)
                 }
             }
         }
@@ -116,7 +108,9 @@ extension Console {
         Console.shared.consoleSize = size ?? Console.shared.consoleSize
         
         if let window = TKWindow {
-            if let consoleView = Console.shared.consoleView {
+            if let consoleView = TKConsoleView.loadFromNib() {
+                consoleView.delegate = Console.shared
+                
                 let consoleGateCenter = Console.shared.consoleGateCenter
                 let consoleOrigin = Console.shared.consoleOrigin
                 let consoleSize = Console.shared.consoleSize
@@ -142,30 +136,28 @@ extension Console {
         }
     }
     
-    public static func closeConsoleView(center: CGPoint? = nil) {
+    static func closeConsoleView(_ consoleView: TKConsoleView, center: CGPoint? = nil) {
         Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
         
         if let window = TKWindow {
-            if let consoleView = Console.shared.consoleView {
-                let consoleGateCenter = Console.shared.consoleGateCenter
-                let blockingView = Console.shared.blockingView
-                
-                blockingView.frame = window.frame
-                
-                window.addSubview(blockingView)
-                window.addSubview(consoleView)
-                
-                UIView.animate(withDuration: animateDuration,
-                               delay: 0,
-                               options: UIViewAnimationOptions.layoutSubviews,
-                               animations: {
-                    consoleView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
-                }) { (completion) in
-                    if completion {
-                        consoleView.removeFromSuperview()
-                        blockingView.removeFromSuperview()
-                        showConsoleGateView(center: center, size: Console.shared.consoleGateSize)
-                    }
+            let consoleGateCenter = Console.shared.consoleGateCenter
+            let blockingView = Console.shared.blockingView
+            
+            blockingView.frame = window.frame
+            
+            window.addSubview(blockingView)
+            window.addSubview(consoleView)
+            
+            UIView.animate(withDuration: animateDuration,
+                           delay: 0,
+                           options: UIViewAnimationOptions.layoutSubviews,
+                           animations: {
+                consoleView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+            }) { (completion) in
+                if completion {
+                    consoleView.removeFromSuperview()
+                    blockingView.removeFromSuperview()
+                    showConsoleGateView(center: center, size: Console.shared.consoleGateSize)
                 }
             }
         }
@@ -175,11 +167,11 @@ extension Console {
 
 extension Console: TKConsoleGateViewDelegate, TKConsoleViewDelegate {
     func dismiss(_ consoleGateView: TKConsoleGateView) {
-        Console.closeConsoleGateView(center: consoleGateView.center)
+        Console.closeConsoleGateView(consoleGateView, center: consoleGateView.center)
     }
     
     func dismiss(_ consoleView: TKConsoleView) {
-        Console.closeConsoleView()
+        Console.closeConsoleView(consoleView)
     }
 }
 
@@ -273,8 +265,10 @@ extension Console {
                         file: file,
                         line: line,
                         column: column)
+        
         print(log.message, separator: "", terminator: "")
         Console.shared.logList.append(log)
+        NotificationCenter.default.post(name: Notification.Name.init(rawValue: Console.recordNotificationName), object: log)
     }
 }
 

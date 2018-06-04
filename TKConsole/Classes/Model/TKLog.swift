@@ -69,5 +69,30 @@ public class TKLog {
             "timestamp": timestamp
         ]
     }
+
+    func message(hasDate: Bool = false, hasFrom: Bool = false) -> String {
+        let dateLog = "\(hasDate ? date.description + ":\n" : "")"
+        let fromLog = "\(hasFrom ? "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">\n" : "")"
+        let log = "\(dateLog)\(message)\(fromLog)"
+        return log
+    }
     
+    func attributedMessage(hasDate: Bool = false, hasFrom: Bool = false) -> NSAttributedString {
+        let dateLog = "\(hasDate ? date.description + ":\n" : "")"
+        let attributedDateLog = NSAttributedString(string: dateLog,
+                                                   attributes: [NSAttributedStringKey.backgroundColor : UIColor.gray,
+                                                                NSAttributedStringKey.foregroundColor: UIColor.white])
+        
+        let attributedMessageLog = NSAttributedString(string: message)
+        
+        let fromLog = "\(hasFrom ? "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">\n" : "")"
+        let attributedFromLog = NSAttributedString(string: fromLog,
+                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
+        
+        let log = NSMutableAttributedString(string: "")
+        log.append(attributedDateLog)
+        log.append(attributedMessageLog)
+        log.append(attributedFromLog)
+        return log.copy() as! NSAttributedString
+    }
 }
