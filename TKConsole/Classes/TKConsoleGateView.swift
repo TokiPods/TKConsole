@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol TKConsoleGateViewDelegate: class {
+    func dismiss(_ consoleGateView: TKConsoleGateView)
+}
+
 class TKConsoleGateView: UIView {
     static let nibName = "TKConsoleGateView"
+    
+    weak var delegate: TKConsoleGateViewDelegate?
     
     var isDragging: Bool = false
     var touchOffset: CGPoint = CGPoint.zero
@@ -26,7 +32,6 @@ class TKConsoleGateView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         layer.cornerRadius = 20
         layer.masksToBounds = true
         
@@ -34,19 +39,7 @@ class TKConsoleGateView: UIView {
     }
     
     @objc func tap() {
-        if let window = TKWindow {
-            blockingView.frame = window.frame
-            window.insertSubview(blockingView, belowSubview: self)
-            
-            UIView.animate(withDuration: 0.1, animations: {
-                self.frame = CGRect(origin: CGPoint(x: self.frame.midX, y: self.frame.midY),
-                                    size: CGSize.zero)
-            }) { (completion) in
-                if completion {
-                    self.blockingView.removeFromSuperview()
-                }
-            }
-        }
+        self.delegate?.dismiss(self)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {

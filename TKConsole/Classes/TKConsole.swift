@@ -12,6 +12,8 @@ public class Console {
     
     public static let shared = Console()
     
+    static let animateDuration = 0.3
+    
     /// 当前内存中的日志
     var logList: [TKLog] = [TKLog]()
     /// 当前文档目录中读取出来的符合时间限制的文件信息
@@ -20,6 +22,29 @@ public class Console {
     var startDate: Date = Date.distantPast
     var endDate: Date = Date.distantFuture
     
+    lazy var blockingView: UIView = {
+        let temp = UIView()
+        temp.backgroundColor = UIColor(white: 0, alpha: 0.4)
+        return temp
+    }()
+    
+    lazy var consoleGateView: TKConsoleGateView? = {
+        let temp = TKConsoleGateView.loadFromNib()
+        temp?.delegate = self
+        return temp
+    }()
+    
+    var consoleGateCenter: CGPoint = CGPoint(x: UIScreen.main.bounds.maxX - 100, y: UIScreen.main.bounds.maxY - 100)
+    var consoleGateSize: CGSize = CGSize(width: 40, height: 40)
+    var consoleOrigin: CGPoint = CGPoint(x: 20, y: 20)
+    var consoleSize: CGSize = CGSize(width: UIScreen.main.bounds.width - 40, height: UIScreen.main.bounds.height - 40)
+    
+    lazy var consoleView: TKConsoleView? = {
+        let temp = TKConsoleView.loadFromNib()
+        temp?.delegate = self
+        return temp
+    }()
+    
     init() {
         self.updateLogFileList()
     }
@@ -27,12 +52,135 @@ public class Console {
 
 extension Console {
     
-    public static func initGate() {
-        if let gateView = TKConsoleGateView.loadFromNib() {
-            TKWindow?.addSubview(gateView)
+    public static func showConsoleGateView(center: CGPoint? = nil, size: CGSize? = nil) {
+        Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
+        Console.shared.consoleGateSize = size ?? Console.shared.consoleGateSize
+        
+        if let window = TKWindow {
+            if let consoleGateView = Console.shared.consoleGateView {
+                let consoleGateCenter = Console.shared.consoleGateCenter
+                let consoleGateSize = Console.shared.consoleGateSize
+                let blockingView = Console.shared.blockingView
+                
+                blockingView.frame = window.frame
+                consoleGateView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+                
+                window.addSubview(blockingView)
+                window.addSubview(consoleGateView)
+                
+                UIView.animate(withDuration: animateDuration,
+                               delay: 0,
+                               options: UIViewAnimationOptions.layoutSubviews,
+                               animations: {
+                    consoleGateView.frame = CGRect(origin: CGPoint(x: consoleGateCenter.x - consoleGateSize.width / 2, y: consoleGateCenter.y - consoleGateSize.height / 2), size: consoleGateSize)
+                }) { (completion) in
+                    if completion {
+                        blockingView.removeFromSuperview()
+                    }
+                }
+            }
         }
     }
     
+    public static func closeConsoleGateView(center: CGPoint? = nil) {
+        Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
+        
+        if let window = TKWindow {
+            if let consoleGateView = Console.shared.consoleGateView {
+                let consoleGateCenter = Console.shared.consoleGateCenter
+                let blockingView = Console.shared.blockingView
+                
+                blockingView.frame = window.frame
+                
+                window.addSubview(blockingView)
+                window.addSubview(consoleGateView)
+                
+                UIView.animate(withDuration: animateDuration,
+                               delay: 0,
+                               options: UIViewAnimationOptions.layoutSubviews,
+                               animations: {
+                    consoleGateView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+                }) { (completion) in
+                    if completion {
+                        consoleGateView.removeFromSuperview()
+                        blockingView.removeFromSuperview()
+                        showConsoleView(center: center, size: Console.shared.consoleSize)
+                    }
+                }
+            }
+        }
+    }
+    
+    public static func showConsoleView(center: CGPoint? = nil, size: CGSize? = nil) {
+        Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
+        Console.shared.consoleSize = size ?? Console.shared.consoleSize
+        
+        if let window = TKWindow {
+            if let consoleView = Console.shared.consoleView {
+                let consoleGateCenter = Console.shared.consoleGateCenter
+                let consoleOrigin = Console.shared.consoleOrigin
+                let consoleSize = Console.shared.consoleSize
+                let blockingView = Console.shared.blockingView
+                
+                blockingView.frame = window.frame
+                consoleView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+                
+                window.addSubview(blockingView)
+                window.addSubview(consoleView)
+                
+                UIView.animate(withDuration: animateDuration,
+                               delay: 0,
+                               options: UIViewAnimationOptions.layoutSubviews,
+                               animations: {
+                    consoleView.frame = CGRect(origin: consoleOrigin, size: consoleSize)
+                }) { (completion) in
+                    if completion {
+                        blockingView.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
+    
+    public static func closeConsoleView(center: CGPoint? = nil) {
+        Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
+        
+        if let window = TKWindow {
+            if let consoleView = Console.shared.consoleView {
+                let consoleGateCenter = Console.shared.consoleGateCenter
+                let blockingView = Console.shared.blockingView
+                
+                blockingView.frame = window.frame
+                
+                window.addSubview(blockingView)
+                window.addSubview(consoleView)
+                
+                UIView.animate(withDuration: animateDuration,
+                               delay: 0,
+                               options: UIViewAnimationOptions.layoutSubviews,
+                               animations: {
+                    consoleView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+                }) { (completion) in
+                    if completion {
+                        consoleView.removeFromSuperview()
+                        blockingView.removeFromSuperview()
+                        showConsoleGateView(center: center, size: Console.shared.consoleGateSize)
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+extension Console: TKConsoleGateViewDelegate, TKConsoleViewDelegate {
+    func dismiss(_ consoleGateView: TKConsoleGateView) {
+        Console.closeConsoleGateView(center: consoleGateView.center)
+    }
+    
+    func dismiss(_ consoleView: TKConsoleView) {
+        Console.closeConsoleView()
+    }
 }
 
 extension Console {
