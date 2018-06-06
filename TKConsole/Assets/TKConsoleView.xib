@@ -25,7 +25,11 @@
                                 <constraint firstAttribute="width" constant="44" id="Xgb-Ke-Eub"/>
                                 <constraint firstAttribute="height" constant="44" id="iOY-KD-sbx"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Close">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="closeButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="r05-s2-II2"/>
                             </connections>
@@ -43,7 +47,11 @@
                                 <constraint firstAttribute="height" constant="44" id="QEO-lE-Fd0"/>
                                 <constraint firstAttribute="width" constant="44" id="dNI-Bn-60Y"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" title="Save">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
                             <connections>
                                 <action selector="saveButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="vOc-Bo-rNY"/>
                             </connections>
@@ -64,7 +72,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJB-Q8-kmJ">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <subviews>
-                        <textView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x75-1B-Ppi">
+                        <textView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x75-1B-Ppi">
                             <rect key="frame" x="0.0" y="40" width="375" height="523"/>
                             <color key="backgroundColor" red="1" green="0.83246291100000003" blue="0.59343173390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <attributedString key="attributedText"/>
@@ -74,7 +82,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="EMB-1S-u2S">
-                                    <rect key="frame" x="5" y="5" width="365" height="30"/>
+                                    <rect key="frame" x="5" y="5" width="295" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -82,13 +90,43 @@
                                         <outlet property="delegate" destination="iN0-l3-epB" id="Cz3-kz-TmP"/>
                                     </connections>
                                 </textField>
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IL6-Uh-iM3">
+                                    <rect key="frame" x="305" y="5" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="9HM-Xa-IqZ"/>
+                                        <constraint firstAttribute="height" constant="30" id="je4-uQ-fal"/>
+                                    </constraints>
+                                    <state key="normal" title="⇩">
+                                        <color key="titleColor" red="0.72732261929999997" green="0.72732261929999997" blue="0.72732261929999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="bottomArrowButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="mxb-Me-ot8"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjH-wQ-UMS">
+                                    <rect key="frame" x="340" y="5" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="F9T-XP-OLI"/>
+                                        <constraint firstAttribute="width" constant="30" id="uk1-hd-Lia"/>
+                                    </constraints>
+                                    <state key="normal" title="⇧">
+                                        <color key="titleColor" red="0.72732261929999997" green="0.72732261929999997" blue="0.72732261929999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="topArrowButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="bYJ-TM-gzG"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.95604619879999997" green="0.96488739329999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="fjH-wQ-UMS" secondAttribute="trailing" constant="5" id="56Q-km-6aD"/>
+                                <constraint firstItem="IL6-Uh-iM3" firstAttribute="leading" secondItem="EMB-1S-u2S" secondAttribute="trailing" constant="5" id="7UC-oa-gHt"/>
                                 <constraint firstAttribute="height" constant="40" id="AGp-48-lih"/>
-                                <constraint firstAttribute="trailing" secondItem="EMB-1S-u2S" secondAttribute="trailing" constant="5" id="BTg-il-4Dz"/>
+                                <constraint firstItem="fjH-wQ-UMS" firstAttribute="leading" secondItem="IL6-Uh-iM3" secondAttribute="trailing" constant="5" id="Exg-Bu-a7P"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="FXb-Ef-2Sb"/>
                                 <constraint firstItem="EMB-1S-u2S" firstAttribute="leading" secondItem="s65-Bj-LyQ" secondAttribute="leading" constant="5" id="ZE8-iv-2uL"/>
+                                <constraint firstItem="IL6-Uh-iM3" firstAttribute="centerY" secondItem="s65-Bj-LyQ" secondAttribute="centerY" id="ZTU-jM-QqI"/>
+                                <constraint firstItem="fjH-wQ-UMS" firstAttribute="centerY" secondItem="s65-Bj-LyQ" secondAttribute="centerY" id="aHg-ug-sw1"/>
                                 <constraint firstItem="EMB-1S-u2S" firstAttribute="centerY" secondItem="s65-Bj-LyQ" secondAttribute="centerY" id="keS-Kd-Ig5"/>
                             </constraints>
                         </view>
@@ -171,6 +209,7 @@
                 <constraint firstItem="MWj-bA-3fd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="wRA-rC-Mc2"/>
             </constraints>
             <connections>
+                <outlet property="bottomArrowButton" destination="IL6-Uh-iM3" id="f8e-nd-XSn"/>
                 <outlet property="dateButton" destination="RA1-fm-W43" id="MDu-Wz-mU1"/>
                 <outlet property="filterTextField" destination="zts-Qo-GGO" id="6dT-QD-Kqr"/>
                 <outlet property="filterView" destination="8SC-KV-UgQ" id="y9X-Om-wzN"/>

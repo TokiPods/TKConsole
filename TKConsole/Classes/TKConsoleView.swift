@@ -23,6 +23,7 @@ class TKConsoleView: UIView {
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var bottomArrowButton: UIButton!
     
     @IBOutlet weak var logTextView: UITextView!
     
@@ -48,11 +49,21 @@ class TKConsoleView: UIView {
         
         searchView.layer.borderWidth = 0.5
         searchView.layer.borderColor = UIColor.lightGray.cgColor
+        searchView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        searchView.layer.shadowColor = UIColor.lightGray.cgColor
+        searchView.layer.shadowOpacity = 0.2
+        searchView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: searchView.bounds.height/2, width: searchView.bounds.width, height: searchView.bounds.height/2)).cgPath
         
         searchTextField.text = Console.shared.search
         
+        bottomArrowButton.isSelected = Console.shared.lockBottom
+        
         filterView.layer.borderWidth = 0.5
         filterView.layer.borderColor = UIColor.lightGray.cgColor
+        filterView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        filterView.layer.shadowColor = UIColor.lightGray.cgColor
+        filterView.layer.shadowOpacity = 0.2
+        filterView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: filterView.bounds.width, height: filterView.bounds.height/2)).cgPath
         
         filterTextField.text = Console.shared.filter
         
@@ -99,9 +110,10 @@ class TKConsoleView: UIView {
                 log.spliceAttributedLog(hasDate: hasDate, hasFrom: hasFrom, search: search ?? "")
             }).join()
         
-        
-        let offsetY = max(logTextView.contentSize.height - logTextView.frame.height, 0)
-        logTextView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
+        if Console.shared.lockBottom {
+            let offsetY = max(logTextView.contentSize.height - logTextView.frame.height, 0)
+            logTextView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
+        }
     }
     
     @IBAction func closeButtonTap(_ sender: Any) {
@@ -127,6 +139,18 @@ class TKConsoleView: UIView {
         
         Console.shared.hasFrom = fromButton.isSelected
         refreshLog()
+    }
+    
+    @IBAction func bottomArrowButtonTap(_ sender: Any) {
+        let bottomArrowButton = sender as! UIButton
+        bottomArrowButton.isSelected = !bottomArrowButton.isSelected
+        
+        Console.shared.lockBottom = bottomArrowButton.isSelected
+        refreshLog()
+    }
+    
+    @IBAction func topArrowButtonTap(_ sender: Any) {
+        logTextView.setContentOffset(CGPoint.zero, animated: true)
     }
     
 }

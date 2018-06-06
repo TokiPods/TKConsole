@@ -24,6 +24,7 @@ public class Console {
     var endDate: Date = Date.distantFuture
     
     var search: String?
+    var lockBottom: Bool = true
     var filter: String?
     var hasDate: Bool = false
     var hasFrom: Bool = false
