@@ -25,20 +25,12 @@ extension Array {
     }
 }
 
-extension Array where Element == TKLog{
-    func message(hasDate: Bool = false, hasFrom: Bool = false) -> String {
-        var message = ""
-        self.forEach { (log) in
-            message += log.message(hasDate: hasDate, hasFrom: hasFrom)
+extension Array where Element == NSAttributedString{
+    func join() -> NSAttributedString {
+        let joinedAttributedString = NSMutableAttributedString(string: "")
+        self.forEach { (attributedString) in
+            joinedAttributedString.append(attributedString)
         }
-        return message
-    }
-    
-    func attributedMessage(hasDate: Bool = false, hasFrom: Bool = false) -> NSAttributedString {
-        let attributedMessage = NSMutableAttributedString(string: "")
-        self.forEach { (log) in
-            attributedMessage.append(log.attributedMessage(hasDate: hasDate, hasFrom: hasFrom))
-        }
-        return attributedMessage.copy() as! NSAttributedString
+        return joinedAttributedString.copy() as! NSAttributedString
     }
 }

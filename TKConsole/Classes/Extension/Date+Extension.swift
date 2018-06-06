@@ -16,7 +16,9 @@ extension Date {
         return String(self.timeIntervalSince1970)
     }
     
-    func description() -> String{
-        return TKDateFormatter().string(from: self)
+    var tk_description: String {
+        get {
+            return TKDateFormatter().string(from: self)
+        }
     }
 }

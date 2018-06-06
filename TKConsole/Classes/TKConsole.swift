@@ -23,6 +23,8 @@ public class Console {
     var startDate: Date = Date.distantPast
     var endDate: Date = Date.distantFuture
     
+    var search: String?
+    var filter: String?
     var hasDate: Bool = false
     var hasFrom: Bool = false
     
@@ -127,10 +129,8 @@ extension Console {
                                options: UIViewAnimationOptions.layoutSubviews,
                                animations: {
                     consoleView.frame = CGRect(origin: consoleOrigin, size: consoleSize)
-                }) { (completion) in
-                    if completion {
-                        blockingView.removeFromSuperview()
-                    }
+                }) { _ in
+                    
                 }
             }
         }

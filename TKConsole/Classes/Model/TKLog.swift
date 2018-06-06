@@ -20,6 +20,13 @@ public class TKLog {
     var date: Date = Date()
     var timestamp: String
     
+    var dateLog: String = ""
+    var messageLog: String = ""
+    var fromLog: String = ""
+    var dateAttributedLog: NSAttributedString = NSAttributedString(string: "")
+    var messageAttributedLog: NSAttributedString = NSAttributedString(string: "")
+    var fromAttributedLog: NSAttributedString = NSAttributedString(string: "")
+    
     init(items: Any...,
         separator: String,
         terminator: String,
@@ -41,6 +48,8 @@ public class TKLog {
         self.column = "\(column)"
         self.date = Date()
         self.timestamp = self.date.timestampString()
+        
+        parseLogs()
     }
     
     init(info: [String: String]) {
@@ -54,6 +63,8 @@ public class TKLog {
         self.column = info["column"] ?? ""
         self.timestamp = info["timestamp"] ?? "0"
         self.date = Date(self.timestamp)
+        
+        parseLogs()
     }
     
     public func toDictionary() -> [String: String]{
@@ -70,29 +81,48 @@ public class TKLog {
         ]
     }
 
-    func message(hasDate: Bool = false, hasFrom: Bool = false) -> String {
-        let dateLog = "\(hasDate ? date.description + ":\n" : "")"
-        let fromLog = "\(hasFrom ? "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">\n" : "")"
-        let log = "\(dateLog)\(message)\(fromLog)"
+    func parseLogs() {
+        dateLog = date.tk_description + ": "
+        messageLog = message
+        fromLog = "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">" + "\n"
+        
+        dateAttributedLog = NSAttributedString(string: dateLog, attributes: [NSAttributedStringKey.backgroundColor : UIColor.gray,
+                                                                             NSAttributedStringKey.foregroundColor: UIColor.white])
+        messageAttributedLog = NSAttributedString(string: messageLog)
+        fromAttributedLog = NSAttributedString(string: fromLog, attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
+    }
+    
+    func filter(hasDate: Bool = false, hasFrom: Bool = false, filter: String = "") -> Bool {
+        guard filter != "" else { return true }
+        
+        let spliceLog = self.spliceLog(hasDate: hasDate, hasFrom: hasFrom)
+        let result = spliceLog.contains(filter)
+        return result
+    }
+    
+    func spliceLog(hasDate: Bool = false, hasFrom: Bool = false) -> String {
+        let log = "\(hasDate ? dateLog : "")\(messageLog)\(hasFrom ? fromLog : "")"
         return log
     }
     
-    func attributedMessage(hasDate: Bool = false, hasFrom: Bool = false) -> NSAttributedString {
-        let dateLog = "\(hasDate ? date.description + ":\n" : "")"
-        let attributedDateLog = NSAttributedString(string: dateLog,
-                                                   attributes: [NSAttributedStringKey.backgroundColor : UIColor.gray,
-                                                                NSAttributedStringKey.foregroundColor: UIColor.white])
-        
-        let attributedMessageLog = NSAttributedString(string: message)
-        
-        let fromLog = "\(hasFrom ? "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">\n" : "")"
-        let attributedFromLog = NSAttributedString(string: fromLog,
-                                                   attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
-        
+    func spliceAttributedLog(hasDate: Bool = false, hasFrom: Bool = false, search: String = "") -> NSAttributedString {
         let log = NSMutableAttributedString(string: "")
-        log.append(attributedDateLog)
-        log.append(attributedMessageLog)
-        log.append(attributedFromLog)
+        if hasDate {
+            log.append(dateAttributedLog)
+        }
+        log.append(messageAttributedLog)
+        if hasFrom {
+            log.append(fromAttributedLog)
+        }
+        
+        if search != "" {
+            let spliceLog = self.spliceLog(hasDate: hasDate, hasFrom: hasFrom)
+            let ranges = spliceLog.nsranges(of: search)
+            ranges.forEach { (range) in
+                log.addAttributes([NSAttributedStringKey.backgroundColor : UIColor.yellow], range: range)
+            }
+        }
+        
         return log.copy() as! NSAttributedString
     }
 }

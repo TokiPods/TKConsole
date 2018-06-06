@@ -64,6 +64,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJB-Q8-kmJ">
                     <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                     <subviews>
+                        <textView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x75-1B-Ppi">
+                            <rect key="frame" x="0.0" y="40" width="375" height="523"/>
+                            <color key="backgroundColor" red="1" green="0.83246291100000003" blue="0.59343173390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <attributedString key="attributedText"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s65-Bj-LyQ">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                             <subviews>
@@ -71,7 +77,10 @@
                                     <rect key="frame" x="5" y="5" width="365" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="iN0-l3-epB" id="Cz3-kz-TmP"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" red="0.95604619879999997" green="0.96488739329999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -90,7 +99,10 @@
                                     <rect key="frame" x="5" y="5" width="275" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="iN0-l3-epB" id="K7q-O2-zEX"/>
+                                    </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l6h-GD-ZpK">
                                     <rect key="frame" x="330" y="5" width="40" height="30"/>
@@ -132,12 +144,6 @@
                                 <constraint firstItem="l6h-GD-ZpK" firstAttribute="centerY" secondItem="8SC-KV-UgQ" secondAttribute="centerY" id="xqI-OC-Kec"/>
                             </constraints>
                         </view>
-                        <textView multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x75-1B-Ppi">
-                            <rect key="frame" x="0.0" y="40" width="375" height="523"/>
-                            <color key="backgroundColor" red="1" green="0.83246291100000003" blue="0.59343173390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <attributedString key="attributedText"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -166,9 +172,13 @@
             </constraints>
             <connections>
                 <outlet property="dateButton" destination="RA1-fm-W43" id="MDu-Wz-mU1"/>
+                <outlet property="filterTextField" destination="zts-Qo-GGO" id="6dT-QD-Kqr"/>
                 <outlet property="filterView" destination="8SC-KV-UgQ" id="y9X-Om-wzN"/>
+                <outlet property="filterViewBottomConstraint" destination="IiN-hm-kzF" id="5so-q6-4mS"/>
+                <outlet property="filterViewTopConstraint" destination="hIs-ZW-aqM" id="ggX-iu-Tfc"/>
                 <outlet property="fromButton" destination="l6h-GD-ZpK" id="5rt-6E-Pnv"/>
                 <outlet property="logTextView" destination="x75-1B-Ppi" id="glB-d2-ml5"/>
+                <outlet property="searchTextField" destination="EMB-1S-u2S" id="gdG-cn-nKH"/>
                 <outlet property="searchView" destination="s65-Bj-LyQ" id="dt7-pd-hrG"/>
             </connections>
             <point key="canvasLocation" x="31.5" y="71.5"/>
