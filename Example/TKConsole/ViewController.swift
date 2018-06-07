@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        Console.showConsoleGateView()
+        Console.addConsoleGateView()
     }
 
     override func didReceiveMemoryWarning() {
