@@ -82,7 +82,7 @@ public class TKLog {
     }
 
     func parseLogs() {
-        dateLog = date.tk_description + ": "
+        dateLog = date.tk_description + ": \n"
         messageLog = message
         fromLog = "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">" + "\n"
         
