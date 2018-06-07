@@ -47,6 +47,32 @@ public class Console {
 
 extension Console {
     
+    public static func hideConsoleGateView() {
+        if let window = TKWindow {
+            if let consoleGateView = TKConsoleGateView.loadFromNib() {
+                let consoleGateCenter = Console.shared.consoleGateCenter
+                let blockingView = Console.shared.blockingView
+                
+                blockingView.frame = window.frame
+                
+                window.addSubview(blockingView)
+                window.addSubview(consoleGateView)
+                
+                UIView.animate(withDuration: animateDuration,
+                               delay: 0,
+                               options: UIViewAnimationOptions.layoutSubviews,
+                               animations: {
+                                consoleGateView.frame = CGRect(origin: consoleGateCenter, size: CGSize.zero)
+                }) { (completion) in
+                    if completion {
+                        consoleGateView.removeFromSuperview()
+                        blockingView.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
+    
     public static func showConsoleGateView(center: CGPoint? = nil, size: CGSize? = nil) {
         Console.shared.consoleGateCenter = center ?? Console.shared.consoleGateCenter
         Console.shared.consoleGateSize = size ?? Console.shared.consoleGateSize
@@ -167,6 +193,7 @@ extension Console {
 }
 
 extension Console: TKConsoleGateViewDelegate, TKConsoleViewDelegate {
+    
     func dismiss(_ consoleGateView: TKConsoleGateView) {
         Console.closeConsoleGateView(consoleGateView, center: consoleGateView.center)
     }
