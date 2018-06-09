@@ -16,4 +16,10 @@ extension DateFormatter {
         self.dateFormat = dateFormat
         return string(from: date)
     }
+    
+    func date(from string: String, with dateFormat: String = TKFullFormat) -> Date? {
+        self.dateFormat = dateFormat
+        return date(from: string)
+    }
 }
+

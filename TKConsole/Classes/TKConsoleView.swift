@@ -23,7 +23,7 @@ class TKConsoleView: UIView {
     
     weak var delegate: TKConsoleViewDelegate?
     
-    var fileList: [TKLogFile] = [TKLogFile]()
+    var fileMapList: [TKLogFileMap] = [TKLogFileMap]()
     
     var selectedIndexPath: IndexPath?
     
@@ -123,7 +123,7 @@ class TKConsoleView: UIView {
             refresh(logList: Console.shared.logList)
         case .history:
             if let indexPath = selectedIndexPath {
-                let file = fileList[indexPath.row]
+                let file = fileMapList[indexPath.section].fileList[indexPath.row]
                 refresh(logList: file.content)
             }
         }
@@ -165,10 +165,23 @@ class TKConsoleView: UIView {
         }else{
             fileListViewHeightConstraint.constant = 160
             
-            fileListTableViewTopConstraint.constant = 2
-            fileListTableViewBottomConstraint.constant = 2
+            fileListTableViewTopConstraint.constant = 0
+            fileListTableViewBottomConstraint.constant = 0
             
-            fileList = Console.shared.selectLogFileList()
+            fileMapList = Console.shared.selectLogFileList()
+                .reduce([String: [TKLogFile]](), { (map, logFile) -> [String: [TKLogFile]] in
+                    var tempMap = map
+                    var tempFileList = tempMap[logFile.dateString] ?? [TKLogFile]()
+                    tempFileList.append(logFile)
+                    tempMap[logFile.dateString] = tempFileList
+                    return tempMap
+                })
+                .map({ (logFileMapData) -> TKLogFileMap in
+                    return TKLogFileMap(dateString: logFileMapData.key, fileList: logFileMapData.value)
+                })
+                .sorted(by: { (first, second) -> Bool in
+                    return first.date < second.date
+                })
             fileListTableView.reloadData()
         }
     }
@@ -244,35 +257,53 @@ extension TKConsoleView: UITextFieldDelegate {
 }
 
 extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fileList.count
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return fileMapList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: TKFileListTableViewCell.identify) as? TKFileListTableViewCell ?? TKFileListTableViewCell.loadFromNib() {
-            cell.update(logFile: fileList[indexPath.row])
-            return cell
-        }else{
-            return UITableViewCell()
-        }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fileMapList[section].fileList.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 18
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 16
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let header = TKFileListTableViewHeader.loadFromNib() {
+            header.update(title: fileMapList[section].dateString)
+            return header
+        }else{
+            return UIView()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: TKFileListTableViewCell.identify) as? TKFileListTableViewCell ?? TKFileListTableViewCell.loadFromNib() {
+            cell.update(logFile: fileMapList[indexPath.section].fileList[indexPath.row])
+            return cell
+        }else{
+            return UITableViewCell()
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         status = .history
         selectedIndexPath = indexPath
         
-        let file = fileList[indexPath.row]
+        let file = fileMapList[indexPath.section].fileList[indexPath.row]
         titleLabel.text = file.dateString+file.timeString
         optionButton.setTitle("Current", for: UIControlState.normal)
         
         refreshLog()
     }
 }
+
