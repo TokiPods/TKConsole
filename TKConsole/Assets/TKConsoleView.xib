@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -85,10 +86,59 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubM-uz-ddg" userLabel="FileList View">
-                    <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
+                    <rect key="frame" x="0.0" y="44" width="375" height="160"/>
                     <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aqv-n3-bjJ">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-Rx-WMn">
+                                    <rect key="frame" x="46" y="0.0" width="141.5" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="TTTT">
+                                        <color key="titleColor" red="0.69000657850000002" green="0.69000657850000002" blue="0.69000657850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJR-8e-aXa">
+                                    <rect key="frame" x="216" y="0.0" width="159" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <state key="normal" title="TTTTT">
+                                        <color key="titleColor" red="0.69000657850000002" green="0.69000657850000002" blue="0.69000657850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsh-1K-xq2">
+                                    <rect key="frame" x="5" y="0.0" width="41" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.42945772059999998" green="0.42945772059999998" blue="0.42945772059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6Z-PK-EjE">
+                                    <rect key="frame" x="192.5" y="0.0" width="23.5" height="40"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.42945772059999998" green="0.42945772059999998" blue="0.42945772059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.95604619879999997" green="0.96488739329999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="t6Z-PK-EjE" firstAttribute="leading" secondItem="aqv-n3-bjJ" secondAttribute="centerX" constant="5" id="48o-ah-ubq"/>
+                                <constraint firstAttribute="trailing" secondItem="zJR-8e-aXa" secondAttribute="trailing" id="AvA-EA-Gti"/>
+                                <constraint firstItem="Y5X-Rx-WMn" firstAttribute="top" secondItem="aqv-n3-bjJ" secondAttribute="top" id="Bl0-op-Hvm"/>
+                                <constraint firstItem="Y5X-Rx-WMn" firstAttribute="leading" secondItem="fsh-1K-xq2" secondAttribute="trailing" id="E2b-N7-wP2"/>
+                                <constraint firstItem="t6Z-PK-EjE" firstAttribute="top" secondItem="aqv-n3-bjJ" secondAttribute="top" id="FVD-DV-zNf"/>
+                                <constraint firstItem="zJR-8e-aXa" firstAttribute="leading" secondItem="t6Z-PK-EjE" secondAttribute="trailing" id="Oe4-fR-Nsl"/>
+                                <constraint firstItem="fsh-1K-xq2" firstAttribute="leading" secondItem="aqv-n3-bjJ" secondAttribute="leading" constant="5" id="QBZ-DD-rpF"/>
+                                <constraint firstAttribute="height" constant="40" id="T3P-lh-TMo"/>
+                                <constraint firstAttribute="bottom" secondItem="zJR-8e-aXa" secondAttribute="bottom" id="Uar-jq-EAB"/>
+                                <constraint firstAttribute="bottom" secondItem="t6Z-PK-EjE" secondAttribute="bottom" id="YPb-tg-weJ"/>
+                                <constraint firstAttribute="bottom" secondItem="Y5X-Rx-WMn" secondAttribute="bottom" id="aGx-zL-XS1"/>
+                                <constraint firstAttribute="bottom" secondItem="fsh-1K-xq2" secondAttribute="bottom" id="aQM-5k-eYT"/>
+                                <constraint firstItem="zJR-8e-aXa" firstAttribute="top" secondItem="aqv-n3-bjJ" secondAttribute="top" id="e7L-8B-hwA"/>
+                                <constraint firstAttribute="centerX" secondItem="Y5X-Rx-WMn" secondAttribute="trailing" id="eK2-XD-eNk"/>
+                                <constraint firstItem="fsh-1K-xq2" firstAttribute="top" secondItem="aqv-n3-bjJ" secondAttribute="top" id="nQC-N8-Y4J"/>
+                            </constraints>
+                        </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="16" sectionHeaderHeight="18" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1na-9X-aqf">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="40" width="375" height="120"/>
                             <color key="backgroundColor" red="0.95604619879999997" green="0.96488739329999995" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <outlet property="dataSource" destination="iN0-l3-epB" id="SqG-9d-TTd"/>
@@ -98,18 +148,21 @@
                     </subviews>
                     <color key="backgroundColor" red="0.57057843760000004" green="0.57057843760000004" blue="0.57057843760000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
+                        <constraint firstItem="1na-9X-aqf" firstAttribute="top" secondItem="aqv-n3-bjJ" secondAttribute="bottom" id="16V-ex-6TU"/>
                         <constraint firstAttribute="trailing" secondItem="1na-9X-aqf" secondAttribute="trailing" id="A0m-e0-lKT"/>
-                        <constraint firstAttribute="height" id="OGr-us-ap3"/>
-                        <constraint firstItem="1na-9X-aqf" firstAttribute="top" secondItem="ubM-uz-ddg" secondAttribute="top" id="SRa-FQ-LRh"/>
+                        <constraint firstItem="aqv-n3-bjJ" firstAttribute="leading" secondItem="ubM-uz-ddg" secondAttribute="leading" id="J99-yv-QwG"/>
+                        <constraint firstAttribute="height" constant="160" id="OGr-us-ap3"/>
+                        <constraint firstItem="aqv-n3-bjJ" firstAttribute="top" secondItem="ubM-uz-ddg" secondAttribute="top" id="SXK-8M-V91"/>
+                        <constraint firstAttribute="trailing" secondItem="aqv-n3-bjJ" secondAttribute="trailing" id="hd2-ga-vQQ"/>
                         <constraint firstItem="1na-9X-aqf" firstAttribute="leading" secondItem="ubM-uz-ddg" secondAttribute="leading" id="itk-BU-dwS"/>
                         <constraint firstAttribute="bottom" secondItem="1na-9X-aqf" secondAttribute="bottom" id="kqt-nO-RR9"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cJB-Q8-kmJ" userLabel="File View">
-                    <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                    <rect key="frame" x="0.0" y="204" width="375" height="463"/>
                     <subviews>
                         <textView multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x75-1B-Ppi">
-                            <rect key="frame" x="0.0" y="40" width="375" height="523"/>
+                            <rect key="frame" x="0.0" y="40" width="375" height="363"/>
                             <color key="backgroundColor" red="1" green="0.83246291100000003" blue="0.59343173390000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <attributedString key="attributedText"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -126,7 +179,7 @@
                                         <outlet property="delegate" destination="iN0-l3-epB" id="Cz3-kz-TmP"/>
                                     </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IL6-Uh-iM3">
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IL6-Uh-iM3">
                                     <rect key="frame" x="305" y="5" width="30" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="30" id="9HM-Xa-IqZ"/>
@@ -146,7 +199,7 @@
                                         <constraint firstAttribute="width" constant="30" id="uk1-hd-Lia"/>
                                     </constraints>
                                     <state key="normal" title="⇧">
-                                        <color key="titleColor" red="0.72732261929999997" green="0.72732261929999997" blue="0.72732261929999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" red="0.69000657850000002" green="0.69000657850000002" blue="0.69000657850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="topArrowButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="bYJ-TM-gzG"/>
@@ -167,7 +220,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8SC-KV-UgQ">
-                            <rect key="frame" x="0.0" y="563" width="375" height="40"/>
+                            <rect key="frame" x="0.0" y="403" width="375" height="40"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Filter" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="zts-Qo-GGO">
                                     <rect key="frame" x="5" y="5" width="275" height="30"/>
@@ -185,7 +238,7 @@
                                         <constraint firstAttribute="height" constant="30" id="ZOK-0f-SqU"/>
                                     </constraints>
                                     <state key="normal" title="From">
-                                        <color key="titleColor" red="0.72732261929999997" green="0.72732261929999997" blue="0.72732261929999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" red="0.69000657850000002" green="0.69000657850000002" blue="0.69000657850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="fromButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="FMf-4x-eFW"/>
@@ -198,7 +251,7 @@
                                         <constraint firstAttribute="width" constant="40" id="dDw-ez-cR5"/>
                                     </constraints>
                                     <state key="normal" title="Date">
-                                        <color key="titleColor" red="0.72732261929999997" green="0.72732261929999997" blue="0.72732261929999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleColor" red="0.69000657850000002" green="0.69000657850000002" blue="0.69000657850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="dateButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="fpb-Ip-Nj7"/>
@@ -250,9 +303,10 @@
             <connections>
                 <outlet property="bottomArrowButton" destination="IL6-Uh-iM3" id="f8e-nd-XSn"/>
                 <outlet property="dateButton" destination="RA1-fm-W43" id="MDu-Wz-mU1"/>
+                <outlet property="endDateButton" destination="zJR-8e-aXa" id="Rqa-1C-XAA"/>
+                <outlet property="fileListDatePickView" destination="aqv-n3-bjJ" id="lyc-ki-dc5"/>
+                <outlet property="fileListDatePickViewHeightConstraint" destination="T3P-lh-TMo" id="XFM-Bn-djQ"/>
                 <outlet property="fileListTableView" destination="1na-9X-aqf" id="uIw-hL-bq3"/>
-                <outlet property="fileListTableViewBottomConstraint" destination="kqt-nO-RR9" id="RWH-SZ-KxD"/>
-                <outlet property="fileListTableViewTopConstraint" destination="SRa-FQ-LRh" id="WdH-hD-y3O"/>
                 <outlet property="fileListView" destination="ubM-uz-ddg" id="h5z-NB-B6V"/>
                 <outlet property="fileListViewHeightConstraint" destination="OGr-us-ap3" id="fLS-fG-CFr"/>
                 <outlet property="filterTextField" destination="zts-Qo-GGO" id="6dT-QD-Kqr"/>
@@ -264,6 +318,7 @@
                 <outlet property="optionButton" destination="YKG-zg-7Kt" id="Wo8-1K-IL5"/>
                 <outlet property="searchTextField" destination="EMB-1S-u2S" id="gdG-cn-nKH"/>
                 <outlet property="searchView" destination="s65-Bj-LyQ" id="dt7-pd-hrG"/>
+                <outlet property="startDateButton" destination="Y5X-Rx-WMn" id="Pzj-DF-Htz"/>
                 <outlet property="titleLabel" destination="HGK-N8-eTV" id="ZVc-TK-0AP"/>
             </connections>
             <point key="canvasLocation" x="31.5" y="71.5"/>

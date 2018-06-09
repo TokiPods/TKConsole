@@ -38,8 +38,11 @@ class TKConsoleView: UIView {
     @IBOutlet weak var fileListView: UIView!
     @IBOutlet weak var fileListViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fileListTableView: UITableView!
-    @IBOutlet weak var fileListTableViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var fileListTableViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var fileListDatePickView: UIView!
+    @IBOutlet weak var startDateButton: UIButton!
+    @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var fileListDatePickViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -67,6 +70,11 @@ class TKConsoleView: UIView {
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.lightGray.cgColor
 
+        fileListDatePickView.layer.borderWidth = 0.5
+        fileListDatePickView.layer.borderColor = UIColor.lightGray.cgColor
+        startDateButton.setTitle(Console.shared.minDate.dateDescription, for: UIControlState.normal)
+        endDateButton.setTitle(Console.shared.maxDate.dateDescription, for: UIControlState.normal)
+        
         searchView.layer.borderWidth = 0.5
         searchView.layer.borderColor = UIColor.lightGray.cgColor
         searchView.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -159,16 +167,12 @@ class TKConsoleView: UIView {
         
         if fileListView.isHidden {
             fileListViewHeightConstraint.constant = 0
-            
-            fileListTableViewTopConstraint.constant = 0
-            fileListTableViewBottomConstraint.constant = 0
+            fileListDatePickViewHeightConstraint.constant = 0
         }else{
             fileListViewHeightConstraint.constant = 160
+            fileListDatePickViewHeightConstraint.constant = 20
             
-            fileListTableViewTopConstraint.constant = 0
-            fileListTableViewBottomConstraint.constant = 0
-            
-            fileMapList = Console.shared.selectLogFileList()
+            fileMapList = Console.shared.currentLogFileList
                 .reduce([String: [TKLogFile]](), { (map, logFile) -> [String: [TKLogFile]] in
                     var tempMap = map
                     var tempFileList = tempMap[logFile.dateString] ?? [TKLogFile]()
@@ -270,7 +274,7 @@ extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 16
+        return 18
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

@@ -18,7 +18,11 @@ public class Console {
     /// 当前内存中的日志
     var logList: [TKLog] = [TKLog]()
     /// 当前文档目录中读取出来的符合时间限制的文件信息
-    var logFiles: [TKLogFile] = [TKLogFile]()
+    var currentLogFileList: [TKLogFile] = [TKLogFile]()
+    var fullLogFileList: [TKLogFile] = [TKLogFile]()
+    
+    var maxDate: Date = Date.distantPast
+    var minDate: Date = Date.distantFuture
     
     var startDate: Date = Date.distantPast
     var endDate: Date = Date.distantFuture
@@ -321,7 +325,7 @@ extension Console {
     public func removeAllLog(form startDate: Date? = nil, to endDate: Date? = nil) {
         checkLimitDate(form: startDate, to: endDate)
         
-        logFiles.forEach { (logFile) in
+        currentLogFileList.forEach { (logFile) in
             logFile.removeLog()
         }
         updateLogFileList()
@@ -336,7 +340,7 @@ extension Console {
                             hasDate: Bool = false, hasFrom: Bool = false) {
         checkLimitDate(form: startDate, to: endDate)
         
-        logFiles.forEach { (logFile) in
+        currentLogFileList.forEach { (logFile) in
             print("<------|File:\(logFile.name)|------>")
             logFile.printLog(hasDate: hasDate, hasFrom: hasFrom)
         }
@@ -360,13 +364,15 @@ extension Console {
         }
     }
     
-    /// 更新当前日志文件信息为限制时间内的所有日志文件信息
-    ///
-    /// - Parameters:
-    ///   - startDate: 起始时间
-    ///   - endDate: 结束时间
+    /// 更新所有日志文件信息 同时 更新当前日志文件信息为限制时间内的所有日志文件信息
     func updateLogFileList() {
-        self.logFiles = selectLogFileList(form: self.startDate, to: self.endDate)
+        fullLogFileList = selectLogFileList(form: Date.distantPast, to: Date.distantFuture)
+        currentLogFileList = fullLogFileList.filter { (logFile) -> Bool in
+            return logFile.date > Date.distantPast && logFile.date < Date.distantFuture
+        }
+        
+        minDate = fullLogFileList.first?.date ?? minDate
+        maxDate = fullLogFileList.last?.date ?? maxDate
     }
     
     /// 挑选限制时间内的所有日志文件信息

@@ -16,8 +16,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kws-Ig-XZZ">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <rect key="frame" x="3" y="0.0" width="372" height="667"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -33,7 +33,7 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="kws-Ig-XZZ" secondAttribute="bottom" id="C7q-pj-Wvz"/>
                 <constraint firstItem="kws-Ig-XZZ" firstAttribute="top" secondItem="wQd-uw-FD4" secondAttribute="top" id="M9w-h6-23C"/>
-                <constraint firstItem="kws-Ig-XZZ" firstAttribute="leading" secondItem="wQd-uw-FD4" secondAttribute="leading" id="U6u-Zm-eX8"/>
+                <constraint firstItem="kws-Ig-XZZ" firstAttribute="leading" secondItem="wQd-uw-FD4" secondAttribute="leading" constant="3" id="U6u-Zm-eX8"/>
                 <constraint firstAttribute="bottom" secondItem="AHU-Wh-6X7" secondAttribute="bottom" id="WV0-Mi-2nt"/>
                 <constraint firstAttribute="trailing" secondItem="AHU-Wh-6X7" secondAttribute="trailing" id="Z05-tj-YQi"/>
                 <constraint firstItem="AHU-Wh-6X7" firstAttribute="leading" secondItem="wQd-uw-FD4" secondAttribute="leading" id="t3k-ve-7GS"/>
