@@ -23,9 +23,9 @@ public class TKLog {
     var dateLog: String = ""
     var messageLog: String = ""
     var fromLog: String = ""
-    var dateAttributedLog: NSAttributedString = NSAttributedString(string: "")
-    var messageAttributedLog: NSAttributedString = NSAttributedString(string: "")
-    var fromAttributedLog: NSAttributedString = NSAttributedString(string: "")
+    var dateAttributedLog: NSMutableAttributedString = NSMutableAttributedString(string: "")
+    var messageAttributedLog: NSMutableAttributedString = NSMutableAttributedString(string: "")
+    var fromAttributedLog: NSMutableAttributedString = NSMutableAttributedString(string: "")
     
     init(items: Any...,
         separator: String,
@@ -86,10 +86,10 @@ public class TKLog {
         messageLog = message
         fromLog = "<" + "method:\(method)_in:\((file as NSString).lastPathComponent)[\(line),\(column)]" + ">" + "\n"
         
-        dateAttributedLog = NSAttributedString(string: dateLog, attributes: [NSAttributedStringKey.backgroundColor : UIColor.gray,
+        dateAttributedLog = NSMutableAttributedString(string: dateLog, attributes: [NSAttributedStringKey.backgroundColor : UIColor.gray,
                                                                              NSAttributedStringKey.foregroundColor: UIColor.white])
-        messageAttributedLog = NSAttributedString(string: messageLog)
-        fromAttributedLog = NSAttributedString(string: fromLog, attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
+        messageAttributedLog = NSMutableAttributedString(string: messageLog, attributes: [NSAttributedStringKey.foregroundColor : UIColor.darkText])
+        fromAttributedLog = NSMutableAttributedString(string: fromLog, attributes: [NSAttributedStringKey.foregroundColor: UIColor.blue])
     }
     
     func filter(hasDate: Bool = false, hasFrom: Bool = false, filter: String = "") -> Bool {
@@ -105,7 +105,7 @@ public class TKLog {
         return log
     }
     
-    func spliceAttributedLog(hasDate: Bool = false, hasFrom: Bool = false, search: String = "") -> NSAttributedString {
+    func spliceAttributedLog(hasDate: Bool = false, hasFrom: Bool = false, search: String = "") -> NSMutableAttributedString {
         let log = NSMutableAttributedString(string: "")
         if hasDate {
             log.append(dateAttributedLog)
@@ -123,6 +123,6 @@ public class TKLog {
             }
         }
         
-        return log.copy() as! NSAttributedString
+        return log
     }
 }

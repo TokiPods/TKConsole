@@ -106,7 +106,7 @@ class TKConsoleView: UIView {
             .filter({ (log) -> Bool in
                 log.filter(hasDate: hasDate, hasFrom: hasFrom, filter: filter ?? "")
             })
-            .map({ (log) -> NSAttributedString in
+            .map({ (log) -> NSMutableAttributedString in
                 log.spliceAttributedLog(hasDate: hasDate, hasFrom: hasFrom, search: search ?? "")
             }).join()
         

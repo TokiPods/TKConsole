@@ -25,12 +25,12 @@ extension Array {
     }
 }
 
-extension Array where Element == NSAttributedString{
-    func join() -> NSAttributedString {
+extension Array where Element == NSMutableAttributedString{
+    func join() -> NSMutableAttributedString {
         let joinedAttributedString = NSMutableAttributedString(string: "")
         self.forEach { (attributedString) in
             joinedAttributedString.append(attributedString)
         }
-        return joinedAttributedString.copy() as! NSAttributedString
+        return joinedAttributedString
     }
 }
