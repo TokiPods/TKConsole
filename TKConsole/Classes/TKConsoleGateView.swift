@@ -25,8 +25,8 @@ class TKConsoleGateView: UIView {
     }()
 
     static func loadFromNib() -> TKConsoleGateView? {
-        let gateNib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
-        return gateNib?.first as? TKConsoleGateView
+        let nib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
+        return nib?.first as? TKConsoleGateView
     }
     
     override func awakeFromNib() {

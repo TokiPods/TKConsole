@@ -35,8 +35,8 @@ class TKConsoleView: UIView {
     @IBOutlet weak var filterViewBottomConstraint: NSLayoutConstraint!
     
     static func loadFromNib() -> TKConsoleView? {
-        let gateNib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
-        return gateNib?.first as? TKConsoleView
+        let nib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
+        return nib?.first as? TKConsoleView
     }
     
     override func awakeFromNib() {
