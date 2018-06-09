@@ -14,12 +14,32 @@ protocol TKConsoleViewDelegate: class {
 class TKConsoleView: UIView {
     static let nibName = "TKConsoleView"
     
+    enum Status {
+        case current
+        case history
+    }
+    
+    var status: Status = .current
+    
     weak var delegate: TKConsoleViewDelegate?
+    
+    var fileList: [TKLogFile] = [TKLogFile]()
+    
+    var selectedIndexPath: IndexPath?
     
     lazy var blockingView: UIView = {
         let temp = UIView()
         return temp
     }()
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var optionButton: UIButton!
+    
+    @IBOutlet weak var fileListView: UIView!
+    @IBOutlet weak var fileListViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fileListTableView: UITableView!
+    @IBOutlet weak var fileListTableViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fileListTableViewBottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -46,7 +66,7 @@ class TKConsoleView: UIView {
         layer.masksToBounds = true
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.lightGray.cgColor
-        
+
         searchView.layer.borderWidth = 0.5
         searchView.layer.borderColor = UIColor.lightGray.cgColor
         searchView.layer.shadowOffset = CGSize(width: 0, height: 2)
@@ -98,21 +118,58 @@ class TKConsoleView: UIView {
     }
     
     @objc func refreshLog() {
+        switch status {
+        case .current:
+            refresh(logList: Console.shared.logList)
+        case .history:
+            if let indexPath = selectedIndexPath {
+                let file = fileList[indexPath.row]
+                refresh(logList: file.content)
+            }
+        }
+    }
+    
+    func refresh(logList: [TKLog]) {
+        
         let hasDate = Console.shared.hasDate
         let hasFrom = Console.shared.hasFrom
         let filter = Console.shared.filter
         let search = Console.shared.search
-        logTextView.attributedText = Console.shared.logList
+        
+        let attributedLog = logList
             .filter({ (log) -> Bool in
                 log.filter(hasDate: hasDate, hasFrom: hasFrom, filter: filter ?? "")
             })
             .map({ (log) -> NSMutableAttributedString in
                 log.spliceAttributedLog(hasDate: hasDate, hasFrom: hasFrom, search: search ?? "")
             }).join()
+        attributedLog.append(NSAttributedString(string: "..."))
+        
+        logTextView.attributedText = attributedLog
         
         if Console.shared.lockBottom {
             let offsetY = max(logTextView.contentSize.height - logTextView.frame.height, 0)
             logTextView.setContentOffset(CGPoint(x: 0, y: offsetY), animated: true)
+        }
+        
+    }
+    
+    @IBAction func titleButtonTap(_ sender: Any) {
+        fileListView.isHidden = !fileListView.isHidden
+        
+        if fileListView.isHidden {
+            fileListViewHeightConstraint.constant = 0
+            
+            fileListTableViewTopConstraint.constant = 0
+            fileListTableViewBottomConstraint.constant = 0
+        }else{
+            fileListViewHeightConstraint.constant = 160
+            
+            fileListTableViewTopConstraint.constant = 2
+            fileListTableViewBottomConstraint.constant = 2
+            
+            fileList = Console.shared.selectLogFileList()
+            fileListTableView.reloadData()
         }
     }
     
@@ -120,8 +177,23 @@ class TKConsoleView: UIView {
         self.delegate?.dismiss(self)
     }
     
-    @IBAction func saveButtonTap(_ sender: Any) {
-        Console.shared.saveLog()
+    @IBAction func optionButtonTap(_ sender: Any) {
+        switch status {
+        case .current:
+            status = .history
+            
+            Console.shared.saveLog()
+        case .history:
+            status = .current
+            
+            titleLabel.text = "Current Log"
+            optionButton.setTitle("Save", for: UIControlState.normal)
+            
+            if let indexPath = selectedIndexPath {
+                fileListTableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
+        
         refreshLog()
     }
     
@@ -168,5 +240,39 @@ extension TKConsoleView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+}
+
+extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fileList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: TKFileListTableViewCell.identify) as? TKFileListTableViewCell ?? TKFileListTableViewCell.loadFromNib() {
+            cell.update(logFile: fileList[indexPath.row])
+            return cell
+        }else{
+            return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        status = .history
+        selectedIndexPath = indexPath
+        
+        let file = fileList[indexPath.row]
+        titleLabel.text = file.dateString+file.timeString
+        optionButton.setTitle("Current", for: UIControlState.normal)
+        
+        refreshLog()
     }
 }

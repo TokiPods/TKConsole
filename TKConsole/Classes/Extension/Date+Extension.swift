@@ -16,9 +16,21 @@ extension Date {
         return String(self.timeIntervalSince1970)
     }
     
-    var tk_description: String {
+    var fullDescription: String {
         get {
-            return TKDateFormatter().string(from: self)
+            return DateFormatter().string(from: self, with: TKFullFormat)
+        }
+    }
+    
+    var dateDescription: String {
+        get {
+            return DateFormatter().string(from: self, with: TKDateFormat)
+        }
+    }
+    
+    var timeDescription: String {
+        get {
+            return DateFormatter().string(from: self, with: TKTimeFormat)
         }
     }
 }

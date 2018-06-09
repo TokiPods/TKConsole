@@ -18,6 +18,7 @@ public class TKLogFile {
     var path: String = "Path_error!"
     var date: Date = Date.distantPast
     var dateString: String = "Date_error!"
+    var timeString: String = "Time_error!"
     var logInfoList: [[String: String]] = [[String: String]]()
     var content: [TKLog] = []
     
@@ -36,7 +37,8 @@ public class TKLogFile {
         
         self.path = TKLogDirPath.appending(self.name)
         self.date = Date(timeIntervalSince1970: self.timestamp)
-        self.dateString = self.date.tk_description
+        self.dateString = self.date.dateDescription
+        self.timeString = self.date.timeDescription
         self.logInfoList = NSMutableArray(contentsOfFile: self.path) as? [[String: String]] ?? [[String: String]]()
         self.content = self.logInfoList.map({ (logInfo) -> TKLog in
             return TKLog(info: logInfo)
