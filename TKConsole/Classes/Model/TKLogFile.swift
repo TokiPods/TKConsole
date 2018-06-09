@@ -36,7 +36,7 @@ public class TKLogFile {
         
         self.path = TKLogDirPath.appending(self.name)
         self.date = Date(timeIntervalSince1970: self.timestamp)
-        self.dateString = self.date.description
+        self.dateString = self.date.tk_description
         self.logInfoList = NSMutableArray(contentsOfFile: self.path) as? [[String: String]] ?? [[String: String]]()
         self.content = self.logInfoList.map({ (logInfo) -> TKLog in
             return TKLog(info: logInfo)
