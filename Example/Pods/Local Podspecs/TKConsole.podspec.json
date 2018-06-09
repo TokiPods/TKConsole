@@ -1,19 +1,19 @@
 {
   "name": "TKConsole",
-  "version": "0.1.0",
-  "summary": "A short description of TKConsole.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/zhengxianda/TKConsole",
+  "version": "0.2.1",
+  "summary": "Running Log for iOS",
+  "description": "Running Log for iOS, We can view log at mobile end systems.",
+  "homepage": "https://github.com/ZhengXianda0512/TKConsole",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "zhengxianda": "xianda.zheng@jiamiantech.com"
+    "zhengxianda": "zhengxianda0512@gmail.com"
   },
   "source": {
-    "git": "https://github.com/zhengxianda/TKConsole.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/ZhengXianda0512/TKConsole.git",
+    "tag": "0.2.1"
   },
   "platforms": {
     "ios": "8.0"

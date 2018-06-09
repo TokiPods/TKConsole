@@ -1,5 +1,5 @@
 PODS:
-  - TKConsole (0.1.0)
+  - TKConsole (0.2.1)
 
 DEPENDENCIES:
   - TKConsole (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  TKConsole: d7593ae0e642cd88ea65741f399c1f932ddac780
+  TKConsole: e06cd5d3ae42571b535c9d8a2258013a17e6bada
 
 PODFILE CHECKSUM: 5b7f4f627a1288d4df7413db555d7d615cdf183b
 
