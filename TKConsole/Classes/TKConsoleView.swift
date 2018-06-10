@@ -219,7 +219,10 @@ open class TKConsoleView: UIView {
             Console.shared.saveLog()
             
             refreshLogFileList()
-            fileListTableView.setContentOffset(CGPoint(x: 0, y: fileListTableView.contentSize.height-fileListTableView.frame.height), animated: true)
+  
+            if Console.shared.endDate.weeDate == Console.shared.maxDate.weeDate {
+                fileListTableView.setContentOffset(CGPoint(x: 0, y: fileListTableView.contentSize.height-fileListTableView.frame.height), animated: true)
+            }
         case .history:
             status = .current
             
