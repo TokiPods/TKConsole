@@ -42,6 +42,12 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="▽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Wx-q7-ee8">
+                            <rect key="frame" x="182" y="32" width="10.5" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" red="0.69000657850000002" green="0.69000657850000002" blue="0.69000657850000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2x-eo-9sf" userLabel="Current Log">
                             <rect key="frame" x="44" y="0.0" width="287" height="44"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
@@ -73,12 +79,14 @@
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="HGK-N8-eTV" secondAttribute="bottom" id="50r-AW-NPj"/>
                         <constraint firstItem="YKG-zg-7Kt" firstAttribute="centerY" secondItem="MWj-bA-3fd" secondAttribute="centerY" id="5TW-bu-neU"/>
+                        <constraint firstAttribute="bottom" secondItem="5Wx-q7-ee8" secondAttribute="bottom" id="8Il-2M-taL"/>
                         <constraint firstAttribute="trailing" secondItem="YKG-zg-7Kt" secondAttribute="trailing" id="8gu-1r-gh2"/>
                         <constraint firstItem="YKG-zg-7Kt" firstAttribute="leading" secondItem="b2x-eo-9sf" secondAttribute="trailing" id="AdA-cf-L2P"/>
                         <constraint firstItem="b2x-eo-9sf" firstAttribute="top" secondItem="MWj-bA-3fd" secondAttribute="top" id="AtO-lj-b3y"/>
                         <constraint firstItem="HGK-N8-eTV" firstAttribute="top" secondItem="MWj-bA-3fd" secondAttribute="top" id="Eti-j7-982"/>
                         <constraint firstItem="HGK-N8-eTV" firstAttribute="leading" secondItem="cZX-bW-QGn" secondAttribute="trailing" id="MgG-mc-5eo"/>
                         <constraint firstAttribute="height" constant="44" id="R8h-89-X1L"/>
+                        <constraint firstItem="5Wx-q7-ee8" firstAttribute="centerX" secondItem="MWj-bA-3fd" secondAttribute="centerX" id="kyw-1i-VFj"/>
                         <constraint firstItem="cZX-bW-QGn" firstAttribute="centerY" secondItem="MWj-bA-3fd" secondAttribute="centerY" id="owV-Ec-BQ9"/>
                         <constraint firstAttribute="bottom" secondItem="b2x-eo-9sf" secondAttribute="bottom" id="poT-Bk-ZOY"/>
                         <constraint firstItem="cZX-bW-QGn" firstAttribute="leading" secondItem="MWj-bA-3fd" secondAttribute="leading" id="r40-xj-AiD"/>
@@ -469,6 +477,7 @@
                 <outlet property="startDateButton" destination="Y5X-Rx-WMn" id="Pzj-DF-Htz"/>
                 <outlet property="startDateConfirmButton" destination="noB-OG-A5t" id="PVW-xw-bP3"/>
                 <outlet property="startDatePicker" destination="MJA-O9-xko" id="kZN-mP-bVa"/>
+                <outlet property="titleArrowLabel" destination="5Wx-q7-ee8" id="xOj-xm-Iww"/>
                 <outlet property="titleLabel" destination="HGK-N8-eTV" id="ZVc-TK-0AP"/>
             </connections>
             <point key="canvasLocation" x="31.5" y="71.5"/>

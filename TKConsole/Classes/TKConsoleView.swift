@@ -34,6 +34,7 @@ open class TKConsoleView: UIView {
     }()
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleArrowLabel: UILabel!
     @IBOutlet weak var optionButton: UIButton!
     
     @IBOutlet weak var fileListView: UIView!
@@ -203,10 +204,13 @@ open class TKConsoleView: UIView {
         if fileListView.isHidden {
             fileListViewHeightConstraint.constant = 0
             fileListDatePickViewHeightConstraint.constant = 0
+            
+            titleArrowLabel.text = "▽"
         }else{
             fileListViewHeightConstraint.constant = 160
             fileListDatePickViewHeightConstraint.constant = 25
 
+            titleArrowLabel.text = "△"
             refreshLogFileList()
         }
     }
