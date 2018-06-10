@@ -24,7 +24,11 @@ public class Console {
     var maxDate: Date = Date.distantPast
     var minDate: Date = Date.distantFuture
     
-    var startDate: Date = Date.distantPast
+    var startDate: Date = Date.distantPast {
+        didSet {
+            print("-*-\(startDate)")
+        }
+    }
     var endDate: Date = Date.distantFuture
     
     var search: String?
@@ -392,13 +396,10 @@ extension Console {
     ///   - startDate: 起始时间
     ///   - endDate: 结束时间
     /// - Returns: 数组[日志文件信息]
-    func selectLogFileList(form startDate: Date? = nil, to endDate: Date? = nil) -> [TKLogFile] {
-        self.startDate = startDate ?? self.startDate
-        self.endDate = endDate ?? self.endDate
-        
+    func selectLogFileList(form startDate: Date = Date.distantPast, to endDate: Date = Date.distantFuture) -> [TKLogFile] {
         return fileNameList()
             .map({ (fileName) -> (valid: Bool, logFile: TKLogFile) in
-                let logFile = TKLogFile(name: fileName, between: self.startDate, to: self.endDate)
+                let logFile = TKLogFile(name: fileName, between: startDate, to: endDate)
                 return (valid: logFile.valid, logFile: logFile)
             })
             .filter({ (valid, logFile) -> Bool in

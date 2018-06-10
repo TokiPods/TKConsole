@@ -78,6 +78,10 @@ class TKConsoleView: UIView {
 
         fileListDatePickView.layer.borderWidth = 0.5
         fileListDatePickView.layer.borderColor = UIColor.lightGray.cgColor
+        startDateConfirmButton.layer.borderWidth = 1
+        startDateConfirmButton.layer.borderColor = UIColor.white.cgColor
+        endDateConfirmButton.layer.borderWidth = 1
+        endDateConfirmButton.layer.borderColor = UIColor.white.cgColor
         startDateButton.setTitle(Console.shared.minDate.dateDescription, for: UIControlState.normal)
         endDateButton.setTitle(Console.shared.maxDate.dateDescription, for: UIControlState.normal)
         
@@ -199,7 +203,7 @@ class TKConsoleView: UIView {
             fileListDatePickViewHeightConstraint.constant = 0
         }else{
             fileListViewHeightConstraint.constant = 160
-            fileListDatePickViewHeightConstraint.constant = 20
+            fileListDatePickViewHeightConstraint.constant = 25
 
             refreshLogFileList()
         }
