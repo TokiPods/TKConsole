@@ -216,9 +216,10 @@ open class TKConsoleView: UIView {
     @IBAction func optionButtonTap(_ sender: Any) {
         switch status {
         case .current:
-            status = .history
-            
             Console.shared.saveLog()
+            
+            refreshLogFileList()
+            fileListTableView.setContentOffset(CGPoint(x: 0, y: fileListTableView.contentSize.height-fileListTableView.frame.height), animated: true)
         case .history:
             status = .current
             
@@ -236,6 +237,7 @@ open class TKConsoleView: UIView {
     @IBAction func refreshButtonTap(_ sender: Any) {
         Console.shared.updateLogFileList()
         refreshLogFileList()
+        fileListTableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func deleteButtonTap(_ sender: Any) {
@@ -261,6 +263,7 @@ open class TKConsoleView: UIView {
         
         Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
+        fileListTableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func endDateButtonTap(_ sender: Any) {
@@ -277,6 +280,7 @@ open class TKConsoleView: UIView {
         
         Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
+        fileListTableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func startDateConfirmButtonTap(_ sender: Any) {
@@ -288,6 +292,7 @@ open class TKConsoleView: UIView {
         
         Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
+        fileListTableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func endDateConfirmButtonTap(_ sender: Any) {
@@ -299,6 +304,7 @@ open class TKConsoleView: UIView {
         
         Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
+        fileListTableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
     @IBAction func bottomArrowButtonTap(_ sender: Any) {
