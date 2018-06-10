@@ -167,6 +167,8 @@ open class TKConsoleView: UIView {
             .sorted(by: { (first, second) -> Bool in
                 return first.date < second.date
             })
+        
+        selectedIndexPath = nil
         fileListTableView.reloadData()
     }
     
@@ -244,12 +246,14 @@ open class TKConsoleView: UIView {
     }
     
     @IBAction func deleteButtonTap(_ sender: Any) {
-        UIAlertView(title: "",
-                    message: "确认删除该日志文件",
-                    delegate: self,
-                    cancelButtonTitle: "取消",
-                    otherButtonTitles: "确认")
-            .show()
+        if selectedIndexPath != nil {
+            UIAlertView(title: "",
+                        message: "确认删除该日志文件",
+                        delegate: self,
+                        cancelButtonTitle: "取消",
+                        otherButtonTitles: "确认")
+                .show()
+        }
     }
     
     @IBAction func startDateButtonTap(_ sender: Any) {
