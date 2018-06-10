@@ -202,11 +202,11 @@ extension Console {
 
 extension Console: TKConsoleGateViewDelegate, TKConsoleViewDelegate {
     
-    func dismiss(_ consoleGateView: TKConsoleGateView) {
+    public func dismiss(_ consoleGateView: TKConsoleGateView) {
         Console.closeConsoleGateView(center: consoleGateView.center)
     }
     
-    func dismiss(_ consoleView: TKConsoleView) {
+    public func dismiss(_ consoleView: TKConsoleView) {
         Console.closeConsoleView()
     }
 }

@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol TKConsoleGateViewDelegate: class {
+public protocol TKConsoleGateViewDelegate: class {
     func dismiss(_ consoleGateView: TKConsoleGateView)
 }
 
-class TKConsoleGateView: UIView {
+open class TKConsoleGateView: UIView {
     static let nibName = "TKConsoleGateView"
     
-    weak var delegate: TKConsoleGateViewDelegate?
+    public weak var delegate: TKConsoleGateViewDelegate?
     
     var isDragging: Bool = false
     var touchOffset: CGPoint = CGPoint.zero
@@ -24,12 +24,12 @@ class TKConsoleGateView: UIView {
         return temp
     }()
 
-    static func loadFromNib() -> TKConsoleGateView? {
+    open static func loadFromNib() -> TKConsoleGateView? {
         let nib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
         return nib?.first as? TKConsoleGateView
     }
     
-    override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
         
         layer.cornerRadius = 20
@@ -42,7 +42,7 @@ class TKConsoleGateView: UIView {
         self.delegate?.dismiss(self)
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if isDragging {
             if let touchPoint = touches.first?.location(in: TKWindow) {
                     frame = CGRect(origin: CGPoint(x: touchPoint.x - touchOffset.x, y: touchPoint.y - touchOffset.y),
@@ -51,18 +51,18 @@ class TKConsoleGateView: UIView {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         TKWindow?.bringSubview(toFront: self)
         
         isDragging = true
         touchOffset = touches.first?.location(in: self) ?? touchOffset
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         isDragging = false
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         isDragging = false
     }
     

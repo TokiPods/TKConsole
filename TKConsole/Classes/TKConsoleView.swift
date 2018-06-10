@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol TKConsoleViewDelegate: class {
+public protocol TKConsoleViewDelegate: class {
     func dismiss(_ consoleView: TKConsoleView)
 }
 
-class TKConsoleView: UIView {
+open class TKConsoleView: UIView {
     static let nibName = "TKConsoleView"
     
     enum Status {
@@ -63,12 +63,12 @@ class TKConsoleView: UIView {
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     
-    static func loadFromNib() -> TKConsoleView? {
+    open static func loadFromNib() -> TKConsoleView? {
         let nib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
         return nib?.first as? TKConsoleView
     }
     
-    override func awakeFromNib() {
+    open override func awakeFromNib() {
         super.awakeFromNib()
 
         layer.cornerRadius = 20
@@ -340,7 +340,7 @@ class TKConsoleView: UIView {
 }
 
 extension TKConsoleView: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         if textField.isEqual(filterTextField) {
             Console.shared.filter = textField.text
         }
@@ -349,34 +349,34 @@ extension TKConsoleView: UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 }
 
 extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    public func numberOfSections(in tableView: UITableView) -> Int {
         return fileMapList.count
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fileMapList[section].fileList.count
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 18
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 18
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let header = TKFileListTableViewHeader.loadFromNib() {
             header.update(title: fileMapList[section].dateString)
             return header
@@ -385,7 +385,7 @@ extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: TKFileListTableViewCell.identify) as? TKFileListTableViewCell ?? TKFileListTableViewCell.loadFromNib() {
             cell.update(logFile: fileMapList[indexPath.section].fileList[indexPath.row])
             return cell
@@ -394,7 +394,7 @@ extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         status = .history
         selectedIndexPath = indexPath
         
@@ -407,7 +407,7 @@ extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TKConsoleView: UIAlertViewDelegate {
-    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+    public func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if buttonIndex == 1 {
             if let indexPath = selectedIndexPath {
                 let file = fileMapList[indexPath.section].fileList[indexPath.row]
