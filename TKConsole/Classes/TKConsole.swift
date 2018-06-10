@@ -24,11 +24,7 @@ public class Console {
     var maxDate: Date = Date.distantPast
     var minDate: Date = Date.distantFuture
     
-    var startDate: Date = Date.distantPast {
-        didSet {
-            print("-*-\(startDate)")
-        }
-    }
+    var startDate: Date = Date.distantPast
     var endDate: Date = Date.distantFuture
     
     var search: String?
