@@ -149,8 +149,6 @@ class TKConsoleView: UIView {
     }
     
     func refreshLogFileList() {
-        Console.shared.updateCurrentLogFileList()
-        
         fileMapList = Console.shared.currentLogFileList
             .reduce([String: [TKLogFile]](), { (map, logFile) -> [String: [TKLogFile]] in
                 var tempMap = map
@@ -202,7 +200,7 @@ class TKConsoleView: UIView {
         }else{
             fileListViewHeightConstraint.constant = 160
             fileListDatePickViewHeightConstraint.constant = 20
-            
+
             refreshLogFileList()
         }
     }
@@ -231,6 +229,20 @@ class TKConsoleView: UIView {
         refreshLog()
     }
     
+    @IBAction func refreshButtonTap(_ sender: Any) {
+        Console.shared.updateLogFileList()
+        refreshLogFileList()
+    }
+    
+    @IBAction func deleteButtonTap(_ sender: Any) {
+        UIAlertView(title: "",
+                    message: "确认删除该日志文件",
+                    delegate: self,
+                    cancelButtonTitle: "取消",
+                    otherButtonTitles: "确认")
+            .show()
+    }
+    
     @IBAction func startDateButtonTap(_ sender: Any) {
         //关闭结束时间的选择器
         endDatePicker.isHidden = true
@@ -243,6 +255,7 @@ class TKConsoleView: UIView {
         startDateConfirmButton.isHidden = startDatePicker.isHidden
         startDatePicker.setDate(Console.shared.startDate, animated: false)
         
+        Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
     }
     
@@ -258,6 +271,7 @@ class TKConsoleView: UIView {
         endDateConfirmButton.isHidden = endDatePicker.isHidden
         endDatePicker.setDate(Console.shared.endDate, animated: false)
         
+        Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
     }
     
@@ -268,6 +282,7 @@ class TKConsoleView: UIView {
         startDateButton.setTitle(startDatePickerValue.dateDescription, for: UIControlState.normal)
         Console.shared.startDate = startDatePickerValue
         
+        Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
     }
     
@@ -278,6 +293,7 @@ class TKConsoleView: UIView {
         endDateButton.setTitle(endDatePickerValue.dateDescription, for: UIControlState.normal)
         Console.shared.endDate = endDatePickerValue
         
+        Console.shared.updateCurrentLogFileList()
         refreshLogFileList()
     }
     
@@ -386,3 +402,16 @@ extension TKConsoleView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension TKConsoleView: UIAlertViewDelegate {
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+        if buttonIndex == 1 {
+            if let indexPath = selectedIndexPath {
+                let file = fileMapList[indexPath.section].fileList[indexPath.row]
+                file.removeLog()
+                
+                Console.shared.updateLogFileList()
+                refreshLogFileList()
+            }
+        }
+    }
+}
