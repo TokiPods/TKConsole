@@ -107,13 +107,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ikc-u6-p7j" userLabel="From">
                                     <rect key="frame" x="0.0" y="0.0" width="187.5" height="0.0"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsh-1K-xq2">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fsh-1K-xq2" userLabel="FromLabel">
                                             <rect key="frame" x="5" y="0.0" width="36" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.42945772059999998" green="0.42945772059999998" blue="0.42945772059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-Rx-WMn">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y5X-Rx-WMn">
                                             <rect key="frame" x="41" y="0.0" width="141.5" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal">
@@ -148,13 +148,13 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cC-Vj-I8Y" userLabel="To">
                                     <rect key="frame" x="187.5" y="0.0" width="187.5" height="0.0"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6Z-PK-EjE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6Z-PK-EjE" userLabel="ToLabel">
                                             <rect key="frame" x="5" y="0.0" width="20.5" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" red="0.42945772059999998" green="0.42945772059999998" blue="0.42945772059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJR-8e-aXa">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJR-8e-aXa">
                                             <rect key="frame" x="25.5" y="0.0" width="157" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <state key="normal">
@@ -170,8 +170,8 @@
                                         <constraint firstItem="t6Z-PK-EjE" firstAttribute="leading" secondItem="9cC-Vj-I8Y" secondAttribute="leading" constant="5" id="72c-tX-aya"/>
                                         <constraint firstAttribute="bottom" secondItem="t6Z-PK-EjE" secondAttribute="bottom" id="78X-eT-A6p"/>
                                         <constraint firstItem="zJR-8e-aXa" firstAttribute="top" secondItem="9cC-Vj-I8Y" secondAttribute="top" id="CpH-bR-PST"/>
-                                        <constraint firstItem="zJR-8e-aXa" firstAttribute="leading" secondItem="t6Z-PK-EjE" secondAttribute="trailing" id="dul-e4-eQ0"/>
                                         <constraint firstAttribute="bottom" secondItem="zJR-8e-aXa" secondAttribute="bottom" id="g4z-h0-HIT"/>
+                                        <constraint firstItem="zJR-8e-aXa" firstAttribute="leading" secondItem="t6Z-PK-EjE" secondAttribute="trailing" id="sck-vP-ZPP"/>
                                         <constraint firstAttribute="trailing" secondItem="zJR-8e-aXa" secondAttribute="trailing" constant="5" id="zvF-LR-Y9M"/>
                                     </constraints>
                                 </view>
