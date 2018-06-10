@@ -367,12 +367,23 @@ extension Console {
     /// 更新所有日志文件信息 同时 更新当前日志文件信息为限制时间内的所有日志文件信息
     func updateLogFileList() {
         fullLogFileList = selectLogFileList(form: Date.distantPast, to: Date.distantFuture)
-        currentLogFileList = fullLogFileList.filter { (logFile) -> Bool in
-            return logFile.date > Date.distantPast && logFile.date < Date.distantFuture
-        }
-        
         minDate = fullLogFileList.first?.date ?? minDate
         maxDate = fullLogFileList.last?.date ?? maxDate
+        
+        if startDate < minDate {
+            startDate = minDate
+        }
+        if endDate > maxDate {
+            endDate = maxDate
+        }
+        
+        updateCurrentLogFileList()
+    }
+    
+    func updateCurrentLogFileList() {
+        currentLogFileList = fullLogFileList.filter { (logFile) -> Bool in
+            return logFile.date >= startDate.weeDate && logFile.date <= endDate.hugeDate
+        }
     }
     
     /// 挑选限制时间内的所有日志文件信息

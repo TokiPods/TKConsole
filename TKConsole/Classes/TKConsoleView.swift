@@ -24,8 +24,9 @@ class TKConsoleView: UIView {
     weak var delegate: TKConsoleViewDelegate?
     
     var fileMapList: [TKLogFileMap] = [TKLogFileMap]()
-    
     var selectedIndexPath: IndexPath?
+    var startDatePickerValue: Date = Date.distantPast
+    var endDatePickerValue: Date = Date.distantFuture
     
     lazy var blockingView: UIView = {
         let temp = UIView()
@@ -42,6 +43,8 @@ class TKConsoleView: UIView {
     @IBOutlet weak var fileListDatePickView: UIView!
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
+    @IBOutlet weak var startDateConfirmButton: UIButton!
+    @IBOutlet weak var endDateConfirmButton: UIButton!
     @IBOutlet weak var fileListDatePickViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var searchView: UIView!
@@ -56,6 +59,9 @@ class TKConsoleView: UIView {
     @IBOutlet weak var fromButton: UIButton!
     @IBOutlet weak var filterViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var filterViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var startDatePicker: UIDatePicker!
+    @IBOutlet weak var endDatePicker: UIDatePicker!
     
     static func loadFromNib() -> TKConsoleView? {
         let nib = TKConsoleBundle?.loadNibNamed(nibName, owner: nil, options: nil)
@@ -98,6 +104,11 @@ class TKConsoleView: UIView {
         dateButton.isSelected = Console.shared.hasDate
         fromButton.isSelected = Console.shared.hasFrom
         
+        startDatePicker.backgroundColor = UIColor.lightGray
+        endDatePicker.backgroundColor = UIColor.lightGray
+        startDatePickerValue = Console.shared.startDate
+        endDatePickerValue = Console.shared.endDate
+        
         refreshLog()
         
         NotificationCenter.default.addObserver(self, selector: #selector(refreshLog), name: NSNotification.Name.init(rawValue: Console.recordNotificationName), object: nil)
@@ -137,6 +148,26 @@ class TKConsoleView: UIView {
         }
     }
     
+    func refreshLogFileList() {
+        Console.shared.updateCurrentLogFileList()
+        
+        fileMapList = Console.shared.currentLogFileList
+            .reduce([String: [TKLogFile]](), { (map, logFile) -> [String: [TKLogFile]] in
+                var tempMap = map
+                var tempFileList = tempMap[logFile.dateString] ?? [TKLogFile]()
+                tempFileList.append(logFile)
+                tempMap[logFile.dateString] = tempFileList
+                return tempMap
+            })
+            .map({ (logFileMapData) -> TKLogFileMap in
+                return TKLogFileMap(dateString: logFileMapData.key, fileList: logFileMapData.value)
+            })
+            .sorted(by: { (first, second) -> Bool in
+                return first.date < second.date
+            })
+        fileListTableView.reloadData()
+    }
+    
     func refresh(logList: [TKLog]) {
         
         let hasDate = Console.shared.hasDate
@@ -172,21 +203,7 @@ class TKConsoleView: UIView {
             fileListViewHeightConstraint.constant = 160
             fileListDatePickViewHeightConstraint.constant = 20
             
-            fileMapList = Console.shared.currentLogFileList
-                .reduce([String: [TKLogFile]](), { (map, logFile) -> [String: [TKLogFile]] in
-                    var tempMap = map
-                    var tempFileList = tempMap[logFile.dateString] ?? [TKLogFile]()
-                    tempFileList.append(logFile)
-                    tempMap[logFile.dateString] = tempFileList
-                    return tempMap
-                })
-                .map({ (logFileMapData) -> TKLogFileMap in
-                    return TKLogFileMap(dateString: logFileMapData.key, fileList: logFileMapData.value)
-                })
-                .sorted(by: { (first, second) -> Bool in
-                    return first.date < second.date
-                })
-            fileListTableView.reloadData()
+            refreshLogFileList()
         }
     }
     
@@ -214,6 +231,68 @@ class TKConsoleView: UIView {
         refreshLog()
     }
     
+    @IBAction func startDateButtonTap(_ sender: Any) {
+        //关闭结束时间的选择器
+        endDatePicker.isHidden = true
+        endDateConfirmButton.isHidden = endDatePicker.isHidden
+        endDateButton.setTitle(endDatePickerValue.dateDescription, for: UIControlState.normal)
+        Console.shared.endDate = endDatePickerValue
+        
+        //开启开始时间的选择器
+        startDatePicker.isHidden = false
+        startDateConfirmButton.isHidden = startDatePicker.isHidden
+        startDatePicker.setDate(Console.shared.startDate, animated: false)
+        
+        refreshLogFileList()
+    }
+    
+    @IBAction func endDateButtonTap(_ sender: Any) {
+        //关闭结束时间的选择器
+        startDatePicker.isHidden = true
+        startDateConfirmButton.isHidden = startDatePicker.isHidden
+        startDateButton.setTitle(startDatePickerValue.dateDescription, for: UIControlState.normal)
+        Console.shared.startDate = startDatePickerValue
+        
+        //开启开始时间的选择器
+        endDatePicker.isHidden = false
+        endDateConfirmButton.isHidden = endDatePicker.isHidden
+        endDatePicker.setDate(Console.shared.endDate, animated: false)
+        
+        refreshLogFileList()
+    }
+    
+    @IBAction func startDateConfirmButtonTap(_ sender: Any) {
+        //关闭结束时间的选择器
+        startDatePicker.isHidden = true
+        startDateConfirmButton.isHidden = startDatePicker.isHidden
+        startDateButton.setTitle(startDatePickerValue.dateDescription, for: UIControlState.normal)
+        Console.shared.startDate = startDatePickerValue
+        
+        refreshLogFileList()
+    }
+    
+    @IBAction func endDateConfirmButtonTap(_ sender: Any) {
+        //关闭结束时间的选择器
+        endDatePicker.isHidden = true
+        endDateConfirmButton.isHidden = endDatePicker.isHidden
+        endDateButton.setTitle(endDatePickerValue.dateDescription, for: UIControlState.normal)
+        Console.shared.endDate = endDatePickerValue
+        
+        refreshLogFileList()
+    }
+    
+    @IBAction func bottomArrowButtonTap(_ sender: Any) {
+        let bottomArrowButton = sender as! UIButton
+        bottomArrowButton.isSelected = !bottomArrowButton.isSelected
+        
+        Console.shared.lockBottom = bottomArrowButton.isSelected
+        refreshLog()
+    }
+    
+    @IBAction func topArrowButtonTap(_ sender: Any) {
+        logTextView.setContentOffset(CGPoint.zero, animated: true)
+    }
+    
     @IBAction func dateButtonTap(_ sender: Any) {
         let dateButton = sender as! UIButton
         dateButton.isSelected = !dateButton.isSelected
@@ -230,16 +309,12 @@ class TKConsoleView: UIView {
         refreshLog()
     }
     
-    @IBAction func bottomArrowButtonTap(_ sender: Any) {
-        let bottomArrowButton = sender as! UIButton
-        bottomArrowButton.isSelected = !bottomArrowButton.isSelected
-        
-        Console.shared.lockBottom = bottomArrowButton.isSelected
-        refreshLog()
+    @IBAction func startDatePickerValueChange(_ sender: Any) {
+        startDatePickerValue = startDatePicker.date
     }
     
-    @IBAction func topArrowButtonTap(_ sender: Any) {
-        logTextView.setContentOffset(CGPoint.zero, animated: true)
+    @IBAction func endDatePickerValueChange(_ sender: Any) {
+        endDatePickerValue = endDatePicker.date
     }
     
 }

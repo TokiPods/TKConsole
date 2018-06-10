@@ -33,4 +33,24 @@ extension Date {
             return DateFormatter().string(from: self, with: TKTimeFormat)
         }
     }
+    
+    var weeDate: Date {
+        get {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: self)
+            let weeDate = calendar.date(from: components)!
+            return weeDate
+        }
+    }
+    
+    var hugeDate: Date {
+        get {
+            let calendar = Calendar.current
+            var components = calendar.dateComponents([.year, .month, .day], from: self)
+            components.setValue(components.day! + 1, for: .day)
+            let hugeDate = calendar.date(from: components)!
+            return hugeDate
+        }
+    }
+    
 }
