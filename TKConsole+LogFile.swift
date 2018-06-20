@@ -10,7 +10,7 @@ import Foundation
 extension Console {
     /// 更新所有日志文件信息 同时 更新当前日志文件信息为限制时间内的所有日志文件信息
     public func updateLogFileList() {
-        fullLogFileList = selectLogFileList(form: Date.distantPast, to: Date.distantFuture)
+        fullLogFileList = selectLogFileList()
         minDate = fullLogFileList.first?.date ?? minDate
         maxDate = fullLogFileList.last?.date ?? maxDate
         
