@@ -52,11 +52,7 @@ public class TKLogFile {
 public extension TKLogFile {
     public func printLog(hasDate: Bool = false, hasFrom: Bool = false) {
         content.forEach { (log) in
-            let dateLog = "\(hasDate ? log.date.description + ":" : "")"
-            let fromLog = "\(hasFrom ? "<" + "method:\(log.method)_in:\((log.file as NSString).lastPathComponent)[\(log.line),\(log.column)]" + ">\n" : "")"
-            print("\(dateLog)\(log.message)\(fromLog)"
-                , separator: ""
-                , terminator: "")
+            print(log.messageLog, separator: "", terminator: "")
         }
     }
     
