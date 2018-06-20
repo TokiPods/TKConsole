@@ -22,6 +22,10 @@
 		4EDA4F8D20DA00F200A3B7F2 /* TKConsole+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F8820DA005900A3B7F2 /* TKConsole+UI.swift */; };
 		4EDA4F8E20DA010500A3B7F2 /* TKConsole+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F8A20DA008500A3B7F2 /* TKConsole+Log.swift */; };
 		4EDA4F9020DA052D00A3B7F2 /* TKConsole+LogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F8F20DA052D00A3B7F2 /* TKConsole+LogFile.swift */; };
+		4EDA4F9320DA338300A3B7F2 /* TKConsoleView+UIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F9220DA338300A3B7F2 /* TKConsoleView+UIResponse.swift */; };
+		4EDA4F9520DA33ED00A3B7F2 /* TKConsoleView+TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F9420DA33EC00A3B7F2 /* TKConsoleView+TextField.swift */; };
+		4EDA4F9720DA341300A3B7F2 /* TKConsoleView+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F9620DA341300A3B7F2 /* TKConsoleView+TableView.swift */; };
+		4EDA4F9920DA3B7D00A3B7F2 /* TKConsoleView+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EDA4F9820DA3B7D00A3B7F2 /* TKConsoleView+UI.swift */; };
 		5BC3D349E8D268E423695488729F9DBB /* Pods-TKConsole_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF6F4B3864E933BE1CBE95A951F43 /* Pods-TKConsole_Tests-dummy.m */; };
 		5BDC5ECDCBAA03A83E98E74A5DBE5C1D /* TKConsole.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C850933AE743A7E802B750F088C6262 /* TKConsole.bundle */; };
 		5C9F5440122719C0E9D5C28640328FFD /* TKFileListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D2480AD427E4565B8F9691FCBC4DC /* TKFileListTableViewHeader.swift */; };
@@ -91,6 +95,10 @@
 		4EDA4F8820DA005900A3B7F2 /* TKConsole+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsole+UI.swift"; sourceTree = "<group>"; };
 		4EDA4F8A20DA008500A3B7F2 /* TKConsole+Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsole+Log.swift"; sourceTree = "<group>"; };
 		4EDA4F8F20DA052D00A3B7F2 /* TKConsole+LogFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsole+LogFile.swift"; sourceTree = "<group>"; };
+		4EDA4F9220DA338300A3B7F2 /* TKConsoleView+UIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsoleView+UIResponse.swift"; sourceTree = "<group>"; };
+		4EDA4F9420DA33EC00A3B7F2 /* TKConsoleView+TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsoleView+TextField.swift"; sourceTree = "<group>"; };
+		4EDA4F9620DA341300A3B7F2 /* TKConsoleView+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsoleView+TableView.swift"; sourceTree = "<group>"; };
+		4EDA4F9820DA3B7D00A3B7F2 /* TKConsoleView+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TKConsoleView+UI.swift"; sourceTree = "<group>"; };
 		50CFE9280232BD5735C8E0CFBCC07D8C /* Pods-TKConsole_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TKConsole_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		57D8DDC94C10DEAF22E249D07D8C5645 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		65659706432C9D83D273BA9D91AB5DEF /* Pods-TKConsole_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TKConsole_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
@@ -216,11 +224,23 @@
 			isa = PBXGroup;
 			children = (
 				C00BD6F5A60732EFE697FD99FF6139C3 /* TKConsoleGateView.swift */,
-				7B1867EBEA4D39E562BB0D8D7900480A /* TKConsoleView.swift */,
+				4EDA4F9120DA336500A3B7F2 /* ConsoleView */,
 				3C694F7C1BE21A633AC3431A5D295893 /* TKFileListTableViewCell.swift */,
 				2E9D2480AD427E4565B8F9691FCBC4DC /* TKFileListTableViewHeader.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4EDA4F9120DA336500A3B7F2 /* ConsoleView */ = {
+			isa = PBXGroup;
+			children = (
+				7B1867EBEA4D39E562BB0D8D7900480A /* TKConsoleView.swift */,
+				4EDA4F9820DA3B7D00A3B7F2 /* TKConsoleView+UI.swift */,
+				4EDA4F9420DA33EC00A3B7F2 /* TKConsoleView+TextField.swift */,
+				4EDA4F9620DA341300A3B7F2 /* TKConsoleView+TableView.swift */,
+				4EDA4F9220DA338300A3B7F2 /* TKConsoleView+UIResponse.swift */,
+			);
+			path = ConsoleView;
 			sourceTree = "<group>";
 		};
 		741600DC506DB9EFF8F298838C91AD21 /* Model */ = {
@@ -545,15 +565,19 @@
 				4EDA4F8D20DA00F200A3B7F2 /* TKConsole+UI.swift in Sources */,
 				844B980E569833247A577AEBC3DE3C78 /* Date+Extension.swift in Sources */,
 				23B669FD7A899B09E8DB3757F0C42C0B /* DateFormatter+Extension.swift in Sources */,
+				4EDA4F9920DA3B7D00A3B7F2 /* TKConsoleView+UI.swift in Sources */,
 				BFE061B1FBCA4E4A21E6040F8EEC9ECC /* NotificationCenter+Extension.swift in Sources */,
 				4EDA4F8E20DA010500A3B7F2 /* TKConsole+Log.swift in Sources */,
 				8482C1DD1AEB99C98DABD657A6D5A11F /* String+Extension.swift in Sources */,
 				734C037EDDCFE997F488FA83E45E8278 /* TimerInterval+Extension.swift in Sources */,
 				C5FAAD487F7F90ACE7CDD573A9250D0F /* TKConsole-dummy.m in Sources */,
+				4EDA4F9520DA33ED00A3B7F2 /* TKConsoleView+TextField.swift in Sources */,
+				4EDA4F9720DA341300A3B7F2 /* TKConsoleView+TableView.swift in Sources */,
 				4EDA4F8720D9FC7A00A3B7F2 /* TKConsole+Transitions.swift in Sources */,
 				8A0A036FB5BEDCB671B68F08EB0301F0 /* TKConsole.swift in Sources */,
 				CF9376594460E4691AD25A121C0A553E /* TKConsoleGateView.swift in Sources */,
 				1C934A4F1B7DE107833C5198AAD90947 /* TKConsoleView.swift in Sources */,
+				4EDA4F9320DA338300A3B7F2 /* TKConsoleView+UIResponse.swift in Sources */,
 				33608BF64AB34693A6E37E010E1C5308 /* TKConst.swift in Sources */,
 				E50651087BA3D472BD666F908642FAF9 /* TKEnum.swift in Sources */,
 				90B6C01FA40667FF7B5A114BAF81978E /* TKFileListTableViewCell.swift in Sources */,

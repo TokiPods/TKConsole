@@ -31,9 +31,9 @@ public class Console {
     var fullLogFileList: [TKLogFile] = [TKLogFile]()
     
     /// 沙盒内全部日志中最大日期
-    var maxDate: Date = Date.distantPast
+    var maxDate: Date = Date.distantFuture
     /// 沙盒内全部日志中最小日期
-    var minDate: Date = Date.distantFuture
+    var minDate: Date = Date.distantPast
     
     /// 筛选器起始日期
     var startDate: Date = Date.distantPast
