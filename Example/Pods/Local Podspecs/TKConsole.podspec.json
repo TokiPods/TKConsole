@@ -1,6 +1,6 @@
 {
   "name": "TKConsole",
-  "version": "0.2.1",
+  "version": "0.4.0",
   "summary": "Running Log for iOS",
   "description": "Running Log for iOS, We can view log at mobile end systems.",
   "homepage": "https://github.com/ZhengXianda0512/TKConsole",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/ZhengXianda0512/TKConsole.git",
-    "tag": "0.2.1"
+    "tag": "0.4.0"
   },
   "platforms": {
     "ios": "8.0"
