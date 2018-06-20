@@ -34,3 +34,11 @@ extension Array where Element == NSMutableAttributedString{
         return joinedAttributedString
     }
 }
+
+extension Array where Element == TKLogFile {
+    public func select(form startDate: Date = Date.distantPast, to endDate: Date = Date.distantFuture) -> [TKLogFile] {
+        return self.filter { (logFile) -> Bool in
+            return logFile.date >= startDate.weeDate && logFile.date <= endDate.hugeDate
+        }
+    }
+}

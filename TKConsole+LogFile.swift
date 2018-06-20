@@ -25,9 +25,7 @@ extension Console {
     }
     
     public func updateCurrentLogFileList() {
-        currentLogFileList = fullLogFileList.filter { (logFile) -> Bool in
-            return logFile.date >= startDate.weeDate && logFile.date <= endDate.hugeDate
-        }
+        currentLogFileList = fullLogFileList.select(form: startDate, to: endDate)
     }
 }
 
@@ -39,7 +37,7 @@ extension Console {
     ///   - startDate: 起始时间
     ///   - endDate: 结束时间
     public func removeAllLog(form startDate: Date = Date.distantPast, to endDate: Date = Date.distantFuture) {
-        let logFileList = selectLogFileList(form: startDate, to: endDate)
+        let logFileList = fullLogFileList.select(form: startDate, to: endDate)
         
         logFileList.forEach { (logFile) in
             logFile.removeLog()
@@ -54,7 +52,7 @@ extension Console {
     ///   - endDate: 结束时间
     public func ptintAllLog(form startDate: Date = Date.distantPast, to endDate: Date = Date.distantFuture,
                             hasDate: Bool = false, hasFrom: Bool = false) {
-        let logFileList = selectLogFileList(form: startDate, to: endDate)
+        let logFileList = fullLogFileList.select(form: startDate, to: endDate)
         
         logFileList.forEach { (logFile) in
             print("<------|File:\(logFile.name)|------>")
@@ -68,7 +66,7 @@ extension Console {
     ///   - startDate: 起始时间
     ///   - endDate: 结束时间
     /// - Returns: 数组[日志文件信息]
-    public func selectLogFileList(form startDate: Date = Date.distantPast, to endDate: Date = Date.distantFuture) -> [TKLogFile] {
+    public func selectLogFileList() -> [TKLogFile] {
         return fileNameList()
             .map({ (fileName) -> (valid: Bool, logFile: TKLogFile) in
                 let logFile = TKLogFile(name: fileName, between: startDate, to: endDate)
