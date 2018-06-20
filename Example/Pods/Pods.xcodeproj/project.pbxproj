@@ -29,7 +29,6 @@
 		5BC3D349E8D268E423695488729F9DBB /* Pods-TKConsole_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B22FF6F4B3864E933BE1CBE95A951F43 /* Pods-TKConsole_Tests-dummy.m */; };
 		5BDC5ECDCBAA03A83E98E74A5DBE5C1D /* TKConsole.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C850933AE743A7E802B750F088C6262 /* TKConsole.bundle */; };
 		5C9F5440122719C0E9D5C28640328FFD /* TKFileListTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D2480AD427E4565B8F9691FCBC4DC /* TKFileListTableViewHeader.swift */; };
-		734C037EDDCFE997F488FA83E45E8278 /* TimerInterval+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455F010509C810930359BF06944AFC1E /* TimerInterval+Extension.swift */; };
 		7EC5188E07249F3F0B5EDDA409BF7C05 /* TKLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D466C42C0FBA5DCB38CE5E9A1CD4929 /* TKLog.swift */; };
 		844B980E569833247A577AEBC3DE3C78 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A62A45F5D79E7A72CA907ECCAF1C42 /* Date+Extension.swift */; };
 		8482C1DD1AEB99C98DABD657A6D5A11F /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293974D4B6E248995BADBD199C052CDE /* String+Extension.swift */; };
@@ -86,7 +85,6 @@
 		3C850933AE743A7E802B750F088C6262 /* TKConsole.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TKConsole.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		41D4CB8661075E2E7E15807D6A67394B /* TKFileListTableViewHeader.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = TKFileListTableViewHeader.xib; path = TKConsole/Assets/TKFileListTableViewHeader.xib; sourceTree = "<group>"; };
 		42FC6552B8D77985E82BF30EE53B0A24 /* Pods-TKConsole_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TKConsole_Example-frameworks.sh"; sourceTree = "<group>"; };
-		455F010509C810930359BF06944AFC1E /* TimerInterval+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "TimerInterval+Extension.swift"; sourceTree = "<group>"; };
 		4796673A89C2732F13250C2B00510C06 /* TKConsole-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TKConsole-dummy.m"; sourceTree = "<group>"; };
 		48EF66EE0B1E8E85911B83ABC36A028D /* Pods-TKConsole_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TKConsole_Example-umbrella.h"; sourceTree = "<group>"; };
 		4BE97D4B57C62420D5E53ED969FBFD55 /* TKLogFileMap.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TKLogFileMap.swift; sourceTree = "<group>"; };
@@ -322,7 +320,6 @@
 				73F8A790A9AC7BFA6A3E63AFC9C03C82 /* DateFormatter+Extension.swift */,
 				CEA24274633B9851457CB5E5CEEF2527 /* NotificationCenter+Extension.swift */,
 				293974D4B6E248995BADBD199C052CDE /* String+Extension.swift */,
-				455F010509C810930359BF06944AFC1E /* TimerInterval+Extension.swift */,
 			);
 			name = Extension;
 			path = TKConsole/Classes/Extension;
@@ -569,7 +566,6 @@
 				BFE061B1FBCA4E4A21E6040F8EEC9ECC /* NotificationCenter+Extension.swift in Sources */,
 				4EDA4F8E20DA010500A3B7F2 /* TKConsole+Log.swift in Sources */,
 				8482C1DD1AEB99C98DABD657A6D5A11F /* String+Extension.swift in Sources */,
-				734C037EDDCFE997F488FA83E45E8278 /* TimerInterval+Extension.swift in Sources */,
 				C5FAAD487F7F90ACE7CDD573A9250D0F /* TKConsole-dummy.m in Sources */,
 				4EDA4F9520DA33ED00A3B7F2 /* TKConsoleView+TextField.swift in Sources */,
 				4EDA4F9720DA341300A3B7F2 /* TKConsoleView+TableView.swift in Sources */,

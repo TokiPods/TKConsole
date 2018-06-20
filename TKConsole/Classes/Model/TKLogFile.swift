@@ -22,7 +22,7 @@ public class TKLogFile {
     var logInfoList: [[String: String]] = [[String: String]]()
     var content: [TKLog] = []
     
-    init(name: String, between startDate: Date = Date.distantPast, to endDate: Date = Date.distantFuture) {
+    init(name: String) {
         self.name = name
         //判断是否为日志文件
         if !self.name.isLog() {
@@ -30,11 +30,6 @@ public class TKLogFile {
         }
         
         self.timestamp = self.name.timeStamp()
-        //判断是否为限制时间内的日志
-        if !self.timestamp.isBetween(form: startDate, to: endDate){
-            return
-        }
-        
         self.path = TKLogDirPath.appending(self.name)
         self.date = Date(timeIntervalSince1970: self.timestamp)
         self.dateString = self.date.dateDescription

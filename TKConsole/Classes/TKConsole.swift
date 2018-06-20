@@ -31,14 +31,14 @@ public class Console {
     var fullLogFileList: [TKLogFile] = [TKLogFile]()
     
     /// 沙盒内全部日志中最大日期
-    var maxDate: Date = Date.distantFuture
+    var maxDate: Date = Date()
     /// 沙盒内全部日志中最小日期
-    var minDate: Date = Date.distantPast
+    var minDate: Date = Date()
     
     /// 筛选器起始日期
-    var startDate: Date = Date.distantPast
+    var startDate: Date = Date()
     /// 筛选器结束日期
-    var endDate: Date = Date.distantFuture
+    var endDate: Date = Date()
     
     /// 查找(高亮)的字符串
     var search: String?

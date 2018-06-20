@@ -69,7 +69,7 @@ extension Console {
     public func selectLogFileList() -> [TKLogFile] {
         return fileNameList()
             .map({ (fileName) -> (valid: Bool, logFile: TKLogFile) in
-                let logFile = TKLogFile(name: fileName, between: startDate, to: endDate)
+                let logFile = TKLogFile(name: fileName)
                 return (valid: logFile.valid, logFile: logFile)
             })
             .filter({ (valid, logFile) -> Bool in
